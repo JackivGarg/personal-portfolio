@@ -1,6 +1,6 @@
 # Engineering Motion
 
-The portfolio hero embeds a twelve-second looping Remotion Player composition. Every visual is driven by the current frame, with no external media or runtime CDN dependencies.
+The portfolio hero embeds a twelve-second looping Remotion Player composition at 900×320. It cycles through actual architecture: Relay's client, FastAPI and SQLite; The Loop's plan, generate, evaluate and improve stages; and document-processing AI workflows. Every visual is driven by the current frame, with no external media or runtime CDN dependencies or invented performance figures.
 
 Run `npm ci` then `npm run build:motion` to rebuild `dist/assets/engineering-motion.js`.
 
