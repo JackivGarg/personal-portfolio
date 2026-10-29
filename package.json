@@ -1,0 +1,21 @@
+{
+  "name": "jackiv-portfolio",
+  "version": "1.0.0",
+  "description": "Responsive portfolio with custom animated system diagrams, accessible project dialogs, reduced-motion support, and downloadable résumé.",
+  "scripts": {
+    "build:motion": "node motion/build.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "commonjs",
+  "dependencies": {
+    "@remotion/player": "4.0.534",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  },
+  "private": true
+}

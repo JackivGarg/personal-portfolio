@@ -10,6 +10,55 @@
   const dialogContent = document.querySelector('#dialog-content');
   let returnFocus = null;
   let framePending = false;
+  let motionPaused = false;
+  let routeClosing = false;
+  const motionToggle = document.querySelector('.motion-toggle');
+
+  motionToggle?.addEventListener('click', () => {
+    motionPaused = !motionPaused;
+    document.body.classList.toggle('motion-paused', motionPaused);
+    motionToggle.setAttribute('aria-pressed', String(motionPaused));
+    motionToggle.setAttribute('aria-label', motionPaused ? 'Resume animation' : 'Pause animation');
+    motionToggle.replaceChildren(document.createTextNode(motionPaused ? 'Motion off ' : 'Motion on '));
+    const icon = document.createElement('span');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = motionPaused ? '▶' : 'Ⅱ';
+    motionToggle.append(icon);
+    if (motionPaused) {
+      art?.style.setProperty('--pointer-x', '0deg');
+      art?.style.setProperty('--pointer-y', '0deg');
+      revealTargets.forEach(target => target.classList.add('is-visible'));
+    }
+  });
+
+  const filterButtons = [...document.querySelectorAll('[data-filter]')];
+  const projectSearch = document.querySelector('#project-search');
+  const projectCards = [...document.querySelectorAll('[data-category]')];
+  let activeFilter = 'all';
+  function filterProjects() {
+    const query = projectSearch?.value.trim().toLowerCase() || '';
+    let visibleCount = 0;
+    projectCards.forEach(card => {
+      const categories = card.dataset.category.split(' ');
+      const matches = (activeFilter === 'all' || categories.includes(activeFilter)) && card.textContent.toLowerCase().includes(query);
+      card.classList.toggle('is-filtered', !matches);
+      card.hidden = !matches;
+      if (matches) {
+        visibleCount += 1;
+        card.classList.add('is-visible');
+      }
+    });
+    document.querySelector('.project-results').textContent = `${visibleCount} ${visibleCount === 1 ? 'project' : 'projects'}`;
+    document.querySelector('.project-empty').hidden = visibleCount > 0;
+    const featured = document.querySelector('.work-grid');
+    featured.classList.toggle('is-filtered', !featured.querySelector('[data-category]:not([hidden])'));
+  }
+  filterButtons.forEach(button => button.addEventListener('click', () => {
+    activeFilter = button.dataset.filter;
+    filterButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    filterProjects();
+  }));
+  projectSearch?.addEventListener('input', filterProjects);
 
   function setMenu(open) {
     menuButton?.setAttribute('aria-expanded', String(open));
@@ -81,7 +130,7 @@
 
   // A small pointer response supplements the diagrams without blocking navigation.
   art?.addEventListener('pointermove', event => {
-    if (motionPreference.matches || event.pointerType === 'touch') return;
+    if (motionPreference.matches || motionPaused || event.pointerType === 'touch') return;
     const bounds = art.getBoundingClientRect();
     const x = (event.clientX - bounds.left) / bounds.width - 0.5;
     const y = (event.clientY - bounds.top) / bounds.height - 0.5;
@@ -169,7 +218,7 @@
     return element;
   }
 
-  function openProject(key, trigger) {
+  function openProject(key, trigger, updateHistory = true) {
     const project = projects[key];
     if (!project || !dialog || !dialogContent) return;
     dialogContent.replaceChildren();
@@ -189,10 +238,11 @@
       link.target = '_blank';
       link.rel = 'noopener';
     }
-    returnFocus = trigger;
-    dialog.showModal();
+    returnFocus = trigger || document.querySelector(`[data-project="${key}"]`);
+    if (!dialog.open) dialog.showModal();
     dialog.scrollTop = 0;
     document.body.classList.add('dialog-open');
+    if (updateHistory && location.hash !== `#project/${key}`) history.pushState({ project: key }, '', `#project/${key}`);
   }
 
   document.querySelectorAll('[data-project]').forEach(button => {
@@ -206,6 +256,85 @@
   });
   dialog?.addEventListener('close', () => {
     document.body.classList.remove('dialog-open');
+    if (!routeClosing && location.hash.startsWith('#project/')) history.replaceState(null, '', '#work');
+    routeClosing = false;
     returnFocus?.focus({ preventScroll: true });
   });
+
+  function syncProjectRoute() {
+    const match = location.hash.match(/^#project\/([a-z]+)$/);
+    if (match && Object.hasOwn(projects, match[1])) openProject(match[1], null, false);
+    else if (dialog?.open) {
+      routeClosing = true;
+      dialog.close();
+    }
+  }
+  window.addEventListener('popstate', syncProjectRoute);
+  window.addEventListener('hashchange', syncProjectRoute);
+  syncProjectRoute();
+
+  // Quiet, deterministic particle flow; the diagram remains the primary visual.
+  const canvas = document.querySelector('.hero-canvas');
+  const context = canvas?.getContext('2d');
+  if (context && art) {
+    let width = 0;
+    let height = 0;
+    let time = 0;
+    let previousFrame = 0;
+    let inView = true;
+    const points = Array.from({ length: 34 }, (_, i) => ({
+      x: ((i * 73 + 19) % 337) / 337,
+      y: ((i * 97 + 43) % 353) / 353,
+      phase: i * 0.72
+    }));
+    function resizeCanvas() {
+      const rect = art.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      renderParticles();
+    }
+    function renderParticles() {
+      context.clearRect(0, 0, width, height);
+      const positions = points.map(point => ({
+        x: point.x * width + Math.sin(time * 0.14 + point.phase) * 17,
+        y: point.y * height + Math.cos(time * 0.11 + point.phase) * 16
+      }));
+      positions.forEach((point, index) => {
+        for (let next = index + 1; next < positions.length; next += 1) {
+          const other = positions[next];
+          const distance = Math.hypot(point.x - other.x, point.y - other.y);
+          if (distance > 106) continue;
+          context.strokeStyle = `rgba(167,205,164,${(1 - distance / 106) * 0.19})`;
+          context.lineWidth = 0.6;
+          context.beginPath();
+          context.moveTo(point.x, point.y);
+          context.lineTo(other.x, other.y);
+          context.stroke();
+        }
+        context.fillStyle = 'rgba(209,241,122,0.38)';
+        context.beginPath();
+        context.arc(point.x, point.y, 1.15, 0, Math.PI * 2);
+        context.fill();
+      });
+    }
+    function animateParticles(timestamp) {
+      if (timestamp - previousFrame >= 40) {
+        if (!motionPaused && !motionPreference.matches && !document.hidden && inView) {
+          time += Math.min((timestamp - previousFrame) / 1000, 0.05);
+          renderParticles();
+        }
+        previousFrame = timestamp;
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(resizeCanvas).observe(art);
+    else window.addEventListener('resize', resizeCanvas, { passive: true });
+    if ('IntersectionObserver' in window) new IntersectionObserver(entries => { inView = entries[0].isIntersecting; }).observe(art);
+    resizeCanvas();
+    requestAnimationFrame(animateParticles);
+  }
 })();

@@ -1,0 +1,33 @@
+/* Interaction layer: small controls, clear states, and compositor-friendly motion. */
+[hidden],.is-filtered{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.motion-toggle{display:inline-flex;align-items:center;gap:12px;background:none;border:1px solid var(--line);border-radius:30px;padding:10px 13px;font:9px monospace;color:var(--muted);white-space:nowrap;transition:color .2s,border-color .2s}
+.motion-toggle span{font-size:10px;color:var(--lime)}
+.motion-toggle[aria-pressed=true]{border-color:#6a755b;color:var(--ink)}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.85}
+.art-heading,.art-bottom,.orbit-scene{z-index:1}
+.project-toolbar{display:flex;justify-content:space-between;align-items:center;gap:25px;margin:0 0 25px;padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.project-filters{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.project-filters button{border:1px solid transparent;background:transparent;padding:11px 15px;font-size:11px;color:var(--muted);border-radius:3px;transition:color .18s,background .18s,border-color .18s}
+.project-filters button[aria-pressed=true]{background:var(--lime);border-color:var(--lime);color:var(--bg)}
+.project-filters button span{font:8px monospace;margin-left:12px;opacity:.65}
+.project-search{display:flex;align-items:center;gap:12px;color:var(--muted);min-width:260px}
+.search-icon{font-size:25px;line-height:1;color:#a3ae9a}
+.project-search input{width:100%;font:11px Arial,Helvetica,sans-serif;color:var(--ink);border:0;background:transparent;padding:13px 0;outline-offset:5px;border-radius:0}
+.project-search input::placeholder{color:#a4aca4;opacity:1}
+.project-search input:focus-visible{outline:1px solid var(--lime)}
+.project-empty{padding:45px 0;font-size:14px;color:var(--muted);line-height:1.7;border-bottom:1px solid var(--line)}
+.message-wire i{left:0}
+@keyframes packet{from{transform:translateX(0)}to{transform:translateX(58px)}}
+.button:active,.circle-button:active{transform:scale(.97);transition:transform 160ms ease-out}
+.detail-button:active,.project-filters button:active,.motion-toggle:active{opacity:.72}
+.motion-paused *,.motion-paused *::before,.motion-paused *::after{animation-play-state:paused!important}
+.motion-paused .hero-art{transform:none!important}
+.motion-paused .reveal{opacity:1;transform:none;transition:none}
+@media(hover:hover){.project-filters button:not([aria-pressed=true]):hover{border-color:var(--line);color:var(--ink)}.motion-toggle:hover{border-color:#839469;color:var(--ink)}}
+@media(hover:none){.button:hover,.circle-button:hover,.contact-title:hover .contact-arrow{transform:none}}
+@media(max-width:1000px){.motion-toggle{padding:9px 11px;gap:7px;font-size:8px}.project-search{min-width:220px}}
+@media(max-width:760px){.motion-toggle{margin-left:auto;margin-right:14px;padding:8px 10px;gap:8px}.header-contact{margin-left:0;margin-right:12px}.project-toolbar{align-items:stretch;flex-direction:column;gap:12px;padding:16px 0}.project-filters{gap:5px}.project-filters button{padding:10px 14px;font-size:10px}.project-search{min-width:0;width:100%;padding:0 12px;background:#191f18;border:1px solid var(--line);border-radius:3px}.project-search input{font-size:12px;padding:13px 0}}
+@media(max-width:370px){.motion-toggle{font-size:7px;gap:5px;padding:8px}.header-contact{font-size:11px}.header-contact span{margin-left:5px}.menu-toggle{padding:9px}}
+@media(prefers-reduced-motion:reduce){.hero-canvas{opacity:.5}.button:active,.circle-button:active{transform:none}.hero-art{transform:none!important}}
+.remotion-ready .orbit-scene,.remotion-ready .hero-canvas{visibility:hidden} #remotion-stage{position:absolute;inset:38px 0;width:100%;height:calc(100% - 76px);pointer-events:none}
