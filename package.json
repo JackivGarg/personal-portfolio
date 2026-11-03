@@ -3,16 +3,19 @@
   "version": "1.0.0",
   "description": "Responsive portfolio with custom animated system diagrams, accessible project dialogs, reduced-motion support, and downloadable résumé.",
   "scripts": {
-    "build:motion": "node motion/build.mjs"
+    "build:motion": "node motion/build.mjs",
+    "build:world": "node world/build.mjs"
   },
   "keywords": [],
   "author": "",
   "type": "commonjs",
   "dependencies": {
     "@remotion/player": "4.0.534",
+    "gsap": "3.15.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "remotion": "4.0.534"
+    "remotion": "4.0.534",
+    "three": "0.187.0"
   },
   "devDependencies": {
     "esbuild": "0.25.12"

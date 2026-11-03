@@ -1,69 +1,150 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-active-chapter="top">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#101312">
-  <meta name="description" content="Explore Jackiv Garg’s work in full-stack development and agentic AI.">
-  <title>Jackiv Garg — Overview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#233db7">
+  <meta name="description" content="Jackiv Garg builds agentic AI workflows, generative models, and the backend systems that make them dependable.">
+  <title>Jackiv Garg — AI & Backend Engineering</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <style>
-    :root{color-scheme:dark;--bg:#101312;--surface:#191e1a;--ink:#eff1e9;--muted:#9ca79c;--line:#343e33;--accent:#d1f17a;--ease:cubic-bezier(.22,1,.36,1)}
-    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg)}body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:5px}::selection{color:var(--bg);background:var(--accent)}
-    .skip{position:absolute;top:-80px;left:24px;z-index:10;background:var(--accent);color:var(--bg);padding:14px}.skip:focus{top:15px}.shell{max-width:1800px;margin:auto;padding:0 4.5%;min-height:100svh;display:grid;grid-template-rows:92px 1fr 75px;overflow:hidden;position:relative}.shell:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 42%,#33412a2b,transparent 50%);pointer-events:none}
-    header,footer{position:relative;display:flex;align-items:center;justify-content:space-between;gap:20px}header{border-bottom:1px solid var(--line)}.mark{font-size:36px;font-weight:700;letter-spacing:-5px;line-height:1}.mark span{color:var(--accent);font-size:23px;margin-left:9px;vertical-align:top}.breadcrumb{font:10px monospace;color:var(--muted);letter-spacing:1.3px;margin-right:auto;margin-left:30px}.breadcrumb span{color:var(--ink);margin-left:12px}.header-links{display:flex;gap:30px;font-size:12px}.header-links a{display:inline-flex;align-items:center;gap:15px}.header-links i{color:var(--accent);font-style:normal}.main{position:relative;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:5vw;padding:50px 0}.identity{position:relative;z-index:1}.kicker{display:flex;align-items:center;gap:11px;font:9px monospace;color:var(--accent);letter-spacing:1.7px;margin:0 0 26px}.kicker:before{content:'';height:5px;width:5px;display:block;background:var(--accent);border-radius:50%;box-shadow:0 0 15px #d1f17a70}.identity h1{font-size:clamp(75px,8vw,140px);font-weight:400;letter-spacing:-.075em;line-height:.88;margin:0}.identity h1 span{display:block;font-family:Georgia,'Times New Roman',serif;font-style:italic;letter-spacing:-.065em;color:var(--accent);padding-bottom:.1em}.identity>p:not(.kicker){font-size:14px;line-height:1.8;max-width:360px;color:#aeb7ac;margin:26px 0 0}.identity-meta{display:flex;align-items:center;gap:20px;margin-top:30px;font:9px/1.6 monospace;color:#8e9c88}.identity-meta:before{content:'';height:24px;width:1px;background:#657754}.identity-meta span{display:block;color:#c4cec0}
-    .art{position:absolute;left:23%;top:9%;width:47%;height:82%;pointer-events:none;opacity:.5;perspective:800px;z-index:0}.orbit{position:absolute;left:50%;top:50%;width:350px;height:350px;border:1px solid #b6d27932;border-radius:50%;transform:translate(-50%,-50%)}.orbit:nth-child(1){animation:orbit-one 35s linear infinite}.orbit:nth-child(2){animation:orbit-two 29s linear infinite}.orbit:nth-child(3){width:280px;height:280px;border-style:dashed;border-color:#bdcf7f16;animation:spin 45s linear infinite}.orbit:nth-child(4){width:430px;height:430px;border-color:#bdcf7f0d}.crosshair{position:absolute;left:50%;top:50%;width:20px;height:20px;transform:translate(-50%,-50%)}.crosshair:before,.crosshair:after{content:'';background:#d1f17a60;position:absolute;left:50%;top:50%}.crosshair:before{width:21px;height:1px;transform:translateX(-50%)}.crosshair:after{height:21px;width:1px;transform:translateY(-50%)}
-    .explore{position:relative;z-index:2;max-width:600px;width:100%;justify-self:end}.explore-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;font:9px monospace;letter-spacing:1.2px;color:#8f9d88}.explore-label span:last-child{color:#5e7055}.destination{display:grid;grid-template-columns:40px 1fr 36px;gap:10px;align-items:center;min-height:126px;padding:20px 25px;border:1px solid var(--line);margin-top:10px;background:#161c17b0;position:relative;overflow:hidden;transition:transform .5s var(--ease),border-color .5s,background .5s}.destination:before{content:'';position:absolute;inset:0;background:linear-gradient(100deg,#d1f17a12,transparent 65%);transform:translateX(-100%);transition:transform .65s var(--ease);pointer-events:none}.destination:hover,.destination:focus-visible{transform:translateX(-8px);border-color:#8da45d;background:#1d281b}.destination:hover:before,.destination:focus-visible:before{transform:translateX(0)}.destination .number{font:9px monospace;color:#72836b;align-self:start;padding-top:7px}.destination h2{font-size:28px;letter-spacing:-1px;font-weight:400;margin:0 0 9px;position:relative}.destination p{font-size:11px;color:#98a590;line-height:1.5;margin:0;position:relative}.arrow{font-size:23px;color:var(--accent);justify-self:end;transition:transform .45s var(--ease)}.destination:hover .arrow{transform:translate(3px,-3px)}.destination .category{font:8px monospace;letter-spacing:1px;color:#708565;position:absolute;right:25px;bottom:15px;opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}.destination:hover .category,.destination:focus-visible .category{opacity:1;transform:none}.destination:first-of-type{border-color:#667d4c}.destination:first-of-type .number{color:#a3be79}.destination:first-of-type h2{color:var(--accent)}.explore-footer{display:flex;align-items:center;gap:20px;margin-top:24px;font:9px monospace;color:#829076;letter-spacing:.5px}.explore-footer:before{content:'';height:1px;flex:1;background:var(--line)}
-    footer{border-top:1px solid var(--line);font:9px monospace;letter-spacing:.6px;color:#85917f}.socials{display:flex;gap:25px}.socials a{padding:10px 0}.socials a:hover{color:var(--accent)}.footer-caption{color:#5d6e55}.motion-toggle{border:0;background:none;color:var(--muted);font:9px monospace;padding:10px 0;cursor:pointer;display:flex;align-items:center;gap:10px}.motion-toggle:before{content:'';height:5px;width:5px;background:var(--accent);border-radius:50%}.motion-toggle[aria-pressed=true]:before{background:#788071}.view-count{font:8px monospace;color:#607357;position:absolute;right:0;top:25px;letter-spacing:2px}
-    .identity .kicker,.identity h1,.identity>p,.identity-meta,.explore-label,.destination,.explore-footer{animation:enter .85s var(--ease) both}.identity h1{animation-delay:.08s}.identity>p{animation-delay:.16s}.identity-meta{animation-delay:.22s}.explore-label{animation-delay:.12s}.destination:nth-of-type(1){animation-delay:.18s}.destination:nth-of-type(2){animation-delay:.25s}.destination:nth-of-type(3){animation-delay:.32s}.explore-footer{animation-delay:.39s}
-    @keyframes enter{from{opacity:0;translate:0 20px}to{opacity:1;translate:0 0}}@keyframes orbit-one{from{transform:translate(-50%,-50%) rotateY(63deg) rotateZ(0)}to{transform:translate(-50%,-50%) rotateY(63deg) rotateZ(360deg)}}@keyframes orbit-two{from{transform:translate(-50%,-50%) rotateX(65deg) rotateZ(30deg)}to{transform:translate(-50%,-50%) rotateX(65deg) rotateZ(390deg)}}@keyframes spin{to{transform:translate(-50%,-50%) rotate(-360deg)}}
-    .motion-paused *{animation-play-state:paused!important;transition:none!important}.motion-paused .identity .kicker,.motion-paused .identity h1,.motion-paused .identity>p,.motion-paused .identity-meta,.motion-paused .explore-label,.motion-paused .destination,.motion-paused .explore-footer{animation:none;opacity:1;translate:none}
-    @media(min-width:1650px){.destination{min-height:150px}.destination h2{font-size:33px}.destination p{font-size:13px}}
-    @media(max-width:1000px){.shell{grid-template-rows:78px 1fr 65px}.main{gap:5vw}.identity h1{font-size:90px}.destination{min-height:115px;padding:20px;grid-template-columns:26px 1fr 25px}.destination h2{font-size:24px}.destination p{font-size:10px}.identity>p:not(.kicker){font-size:13px}.art{left:10%;opacity:.3}.breadcrumb{margin-left:15px}.header-links{gap:20px}.footer-caption{display:none}}
-    @media(max-width:720px){.shell{padding:0 7%;grid-template-rows:75px 1fr auto;min-height:100svh}.breadcrumb{font-size:8px;letter-spacing:.5px;margin-left:12px}.breadcrumb span{margin-left:6px}.header-links{font-size:11px}.header-links>a:first-child{display:none}.header-links a{gap:8px}.main{grid-template-columns:1fr;padding:48px 0 30px;gap:40px}.identity h1{font-size:clamp(78px,18vw,120px);line-height:.87}.kicker{font-size:8px;letter-spacing:1px;margin-bottom:25px}.identity>p:not(.kicker){font-size:12px;line-height:1.8;max-width:300px;margin-top:22px}.identity-meta{font-size:8px;margin-top:20px;line-height:1.7}.explore{max-width:none}.explore-label{font-size:8px;margin-bottom:12px}.destination{min-height:103px;margin-top:8px;grid-template-columns:25px 1fr 24px;padding:18px}.destination h2{font-size:24px;margin-bottom:7px}.destination p{font-size:10px;max-width:215px}.destination .category{display:none}.destination:hover,.destination:focus-visible{transform:translateX(-3px)}.explore-footer{font-size:8px;margin-top:18px}.art{width:100%;height:480px;left:20%;top:-2%;opacity:.25}.orbit{width:290px;height:290px}.orbit:nth-child(4){width:380px;height:380px}footer{min-height:95px;flex-wrap:wrap;padding:18px 0;gap:8px;font-size:8px}.socials{gap:20px;order:1;width:100%;margin-bottom:4px}footer>span{order:2}.motion-toggle{order:3;margin-left:auto;font-size:8px}.view-count{display:none}}
-    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.destination:hover,.destination:focus-visible{transform:none}}
-  </style>
-<script defer src="assets/engineering-motion.js"></script><style>.remotion-ready>.orbit,.remotion-ready>.crosshair{visibility:hidden}.art #remotion-stage{position:absolute;inset:0;width:100%;height:100%}.destination:active{transform:scale(.97);transition:transform 160ms ease-out}@media(hover:none){.destination:hover{transform:none}}</style><style>.identity .art{position:relative;left:auto;top:auto;width:min(100%,440px);height:170px;opacity:1;perspective:none;margin-top:24px;border-top:1px solid #343e33}.identity .art #remotion-stage{inset:0!important;width:100%!important;height:100%!important}@media(max-width:720px){.identity .art{height:140px;margin-top:18px}}</style></head>
+  <link rel="stylesheet" href="journey.css">
+  <script src="world.js" defer></script>
+</head>
 <body>
-  <a href="#overview" class="skip">Skip to overview</a>
-  <div class="shell">
-    <header>
-      <a class="mark" href="index.html" aria-label="Jackiv Garg overview">jg<span aria-hidden="true">*</span></a>
-      <div class="breadcrumb">PORTFOLIO <span>/ OVERVIEW</span></div>
-      <div class="header-links"><a href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Résumé <i aria-hidden="true">↗</i></a><a href="mailto:jackivcodes05@gmail.com">Let’s talk <i aria-hidden="true">↗</i></a></div>
-    </header>
-    <main id="overview" class="main">
-      
-      <div class="identity">
-        <p class="kicker">FULL-STACK DEVELOPMENT · AGENTIC AI</p>
-        <h1>Jackiv<span>Garg.</span></h1>
-        <p>From the interface to the intelligence underneath. Explore the work, the decisions, and the person behind the build.</p>
-        <div class="identity-meta"><div>COMPUTER SCIENCE & ENGINEERING<span>Bennett University · Class of 2028</span></div></div><div class="art" aria-hidden="true"></div>
-      </div>
-      <nav class="explore" aria-label="Explore the portfolio">
-        <div class="explore-label"><span>CHOOSE YOUR NEXT VIEW</span><span>01 — 03</span></div>
-        <a class="destination" href="portfolio.html#work"><span class="number" aria-hidden="true">01</span><div><h2>Selected work</h2><p>Projects, architecture, and the engineering inside.</p></div><span class="arrow" aria-hidden="true">↗</span><span class="category" aria-hidden="true">EXPLORE THE BUILDS</span></a>
-        <a class="destination" href="portfolio.html#experience"><span class="number" aria-hidden="true">02</span><div><h2>Experience</h2><p>Production AI workflows. Measurable impact.</p></div><span class="arrow" aria-hidden="true">↗</span><span class="category" aria-hidden="true">ENGINEERING IN PRACTICE</span></a>
-        <a class="destination" href="portfolio.html#about"><span class="number" aria-hidden="true">03</span><div><h2>About Jackiv</h2><p>Curiosity, technical craft, and the current chapter.</p></div><span class="arrow" aria-hidden="true">↗</span><span class="category" aria-hidden="true">BEHIND THE WORK</span></a>
-        <div class="explore-footer">IDEAS, ENGINEERED.</div>
-      </nav>
-    </main>
-    <footer><span>© 2026 Jackiv Garg</span><div class="socials"><a href="https://github.com/JackivGarg" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.linkedin.com/in/jackiv-garg" target="_blank" rel="noopener">LinkedIn ↗</a><a href="mailto:jackivcodes05@gmail.com">Email ↗</a></div><span class="footer-caption">EXPLORATION STARTS HERE</span><button class="motion-toggle" type="button" aria-pressed="false">Pause motion</button></footer>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead">
+    <a href="#top" class="brand"><span class="mark" aria-hidden="true">JG</span><span>Jackiv Garg</span></a>
+    <nav class="chapter-nav" aria-label="Chapters">
+      <a href="#production" data-nav="production">Experience</a>
+      <a href="#agentic" data-nav="agentic">Agentic AI</a>
+      <a href="#generative" data-nav="generative">Generative AI</a>
+      <a href="#backend" data-nav="backend">Backend</a>
+      <a href="#toolkit" data-nav="toolkit">Toolkit</a>
+    </nav>
+    <div class="masthead-actions">
+      <button type="button" id="motion-toggle" class="motion" aria-pressed="false" aria-label="Pause motion"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 5v10m6-10v10"/></svg><span data-motion-label>Pause motion</span></button>
+      <a class="resume" href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+    </div>
+    <div id="scroll-progress" aria-hidden="true"></div>
+  </header>
+
+  <div class="stage" aria-hidden="true">
+    <svg class="world-poster" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="board-top" x2="1" y2="1"><stop stop-color="#8da9ff"/><stop offset="1" stop-color="#334fbc"/></linearGradient>
+        <pattern id="board-grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0v18" fill="none" stroke="#c4d4ff" stroke-opacity=".22"/></pattern>
+      </defs>
+      <g transform="translate(25 105)" fill="none" stroke="#b5caff" stroke-linejoin="round">
+        <path d="M55 330 335 164 623 323 343 489Z" fill="#182c88" stroke-opacity=".45"/>
+        <path d="M55 296 335 130 623 289 343 455Z" fill="url(#board-top)"/>
+        <path d="M55 296 343 455v34L55 330ZM343 455l280-166v34L343 489Z" fill="#263d9e"/>
+        <path d="M55 296 335 130 623 289 343 455Z" fill="url(#board-grid)"/>
+        <path d="m185 280 150-88 168 92-151 89Z" fill="#1d328f" stroke="#b6e6ff"/>
+        <path d="m257 279 81-48 86 47-81 48Z" fill="#b2d0fa" stroke="#e0f4ff"/>
+        <path d="m257 279 86 47v20l-86-47ZM343 326l81-48v20l-81 48Z" fill="#607ed6"/>
+        <path d="m164 315 53-31 39 21m224-60-44 25 41 23 61-36m-238-48 42 23m33 119 33 18-51 31m-126-57-35 20" stroke="#caeaff" stroke-width="2"/>
+        <circle cx="164" cy="315" r="4" fill="#b6e6ff"/><circle cx="538" cy="257" r="4" fill="#b6e6ff"/><circle cx="357" cy="400" r="4" fill="#b6e6ff"/>
+      </g>
+    </svg>
+    <canvas id="world" aria-hidden="true"></canvas>
+    <div class="world-caption">
+      <span data-label="top">System core</span><span data-label="production">Production rack</span><span data-label="agentic">Agent graph</span><span data-label="generative">Generation aperture</span><span data-label="backend">Backend layers</span><span data-label="toolkit">Engineering toolkit</span>
+      <span class="world-note">Conceptual model</span>
+    </div>
   </div>
-  <script>
-    (() => {
-      const button = document.querySelector('.motion-toggle');
-      const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
-      let paused = preference.matches;
-      const update = () => {
-        document.body.classList.toggle('motion-paused', paused);
-        button.setAttribute('aria-pressed', String(paused));
-        button.textContent = paused ? 'Motion paused' : 'Pause motion';
-      };
-      update();
-      button.addEventListener('click', () => { paused = !paused; update(); });
-      preference.addEventListener('change', event => { paused = event.matches; update(); });
-    })();
-  </script>
+
+  <main id="main" class="journey">
+    <section id="top" class="chapter hero" data-chapter="top" aria-labelledby="hero-title">
+      <div class="chapter-inner">
+        <h1 id="hero-title" class="hero-title">Jackiv Garg</h1>
+        <p class="hero-intro">I build the systems behind intelligent software.</p>
+        <p class="lede">Agentic AI workflows, generative models, and Python backends. I like following a system from its first design decision through evaluation, failure handling, and deployment.</p>
+        <div class="actions"><a href="#production" class="button">Explore the work <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 4v11m-5-5 5 5 5-5"/></svg></a><a href="https://github.com/JackivGarg" class="text-link">GitHub</a></div>
+        <p class="scroll-cue">Scroll through six engineering chapters</p>
+      </div>
+    </section>
+
+    <section id="production" class="chapter" data-chapter="production" aria-labelledby="production-title">
+      <span id="experience" class="legacy-anchor" aria-hidden="true"></span>
+      <div class="chapter-inner">
+        <h2 id="production-title">AI in production</h2>
+        <p class="case-label">Munshot · Agentic AI Developer</p>
+        <p class="lede">I worked on Python APIs and LLM workflows that route queries, extract structured data from documents, and validate the output before it moves downstream.</p>
+        <div class="facts"><dl><div><dt>92%</dt><dd>structured KPI extraction accuracy</dd></div><div><dt>25%</dt><dd>lower end-to-end workflow latency</dd></div><div><dt>500+</dt><dd>daily pipeline runs monitored</dd></div></dl></div>
+        <ul class="detail-list">
+          <li><strong>Routing.</strong> Added requirement-aware routing and handled extraction edge cases, reducing extraction errors by 18%.</li>
+          <li><strong>Throughput.</strong> Optimized multi-step LLM workflows and routing endpoints, improving throughput by 30%.</li>
+          <li><strong>Observability.</strong> Built dashboards for accuracy and failure patterns, reducing regression detection time by 40%.</li>
+        </ul>
+        <p class="evidence">Performance figures as reported in my résumé.</p>
+        <div class="source-links"><a href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Read the résumé</a></div>
+      </div>
+    </section>
+
+    <section id="agentic" class="chapter" data-chapter="agentic" aria-labelledby="agentic-title">
+      <div class="chapter-inner">
+        <h2 id="agentic-title">An agent loop you can inspect</h2>
+        <p class="case-label">The Loop · React, FastAPI, SQLite, Groq</p>
+        <p class="lede">The Loop turns a brief into a website through four stages: plan, generate, evaluate, and improve. Each pass leaves a draft and an evaluation record, so you can see what changed and keep the best version.</p>
+        <ol class="detail-list">
+          <li><strong>Evaluation.</strong> Deterministic checks and a model rubric score each draft. Evaluation criteria are frozen per run so later edits do not change the comparison.</li>
+          <li><strong>Durability.</strong> The queue saves state and checkpoints. Queued jobs recover after a restart, while interrupted runs retain their drafts without automatically replaying paid inference.</li>
+          <li><strong>Isolation.</strong> Generated HTML opens in a sandbox. Projects have per-user ownership checks, and evaluation profiles support rollback.</li>
+        </ol>
+        <p class="evidence">The worker is single-instance. Cancellation happens between stages, and static checks complement browser testing.</p>
+        <div class="source-links"><a href="https://github.com/JackivGarg/THE-LOOP">Read the source and architecture</a><a href="portfolio.html#project/loop">Open project detail</a></div>
+      </div>
+    </section>
+
+    <section id="generative" class="chapter" data-chapter="generative" aria-labelledby="generative-title">
+      <div class="chapter-inner">
+        <h2 id="generative-title">Training from scratch</h2>
+        <p class="case-label">StorySeed · Tokenization, causal attention, evaluation</p>
+        <p class="lede">I built a small English story model from random initialization. The work moved from a character baseline through byte-pair encoding, causal attention, a decoder, and repeatable evaluation.</p>
+        <div class="facts"><dl><div><dt>8.47M</dt><dd>model parameters</dd></div><div><dt>4,096</dt><dd>BPE vocabulary</dd></div><div><dt>256</dt><dd>token context</dd></div></dl></div>
+        <p>The recovery model was trained for 48,000 updates. On the same 200 reserved stories, bits per UTF-8 byte went from 1.708 to 0.626. The comparison measures the combined changes.</p>
+        <p class="evidence">Story coherence remains experimental. The public repository documents the evaluation and keeps trained weights local.</p>
+        <div class="source-links"><a href="https://github.com/JackivGarg/StorySeed">Explore StorySeed</a><a href="https://github.com/JackivGarg/StorySeed/blob/main/docs/RECOVERY_MODEL_CARD.md">Read the model card</a></div>
+      </div>
+    </section>
+
+    <section id="backend" class="chapter" data-chapter="backend" aria-labelledby="backend-title">
+      <span id="work" class="legacy-anchor" aria-hidden="true"></span>
+      <div class="chapter-inner">
+        <h2 id="backend-title">Behind the interface</h2>
+        <p class="lede">I care about the behavior users notice when a connection drops, a message retries, or a workflow has to recover.</p>
+        <div class="work-list">
+          <article><h3>Relay</h3><p>Real-time messaging with authenticated WebSockets, client-generated IDs for idempotent sends, and SQLite persistence. The Azure deployment used Docker Compose, Caddy TLS, health checks, and backups.</p><p class="evidence">Educational Signal-inspired build with mocked OTP and server-side message storage.</p><a href="https://github.com/JackivGarg/SIGNAL-CLONE">Relay source</a></article>
+          <article><h3>VersitySync</h3><p>Led a six-person team building interview practice for students. Live sessions combine voice transcription, interruption handling, and adaptive follow-ups across role-based and coding interviews.</p><a href="portfolio.html#project/versity">VersitySync details</a></article>
+          <article><h3>Vehicle Insurance Prediction</h3><p>A six-stage ML pipeline with containerized FastAPI inference and GitHub Actions automation for building images and publishing to Amazon ECR.</p><a href="https://github.com/JackivGarg/Vehicle-Insurance-">Pipeline source</a></article>
+        </div>
+        <div class="source-links"><a href="portfolio.html#work">Browse the project explorer</a><a href="https://github.com/JackivGarg?tab=repositories">GitHub profile projects</a></div>
+      </div>
+    </section>
+
+    <section id="toolkit" class="chapter" data-chapter="toolkit" aria-labelledby="toolkit-title">
+      <span id="about" class="legacy-anchor" aria-hidden="true"></span>
+      <div class="chapter-inner">
+        <h2 id="toolkit-title">Toolkit and recognition</h2>
+        <p class="lede">B.Tech in Computer Science &amp; Engineering at Bennett University, expected 2028. CGPA 8.78.</p>
+        <dl class="skill-list">
+          <div><dt>AI engineering</dt><dd>LangGraph, LangChain, retrieval-augmented generation, model evaluation, Hugging Face, scikit-learn</dd></div>
+          <div><dt>Backend &amp; data</dt><dd>Python, FastAPI, REST, WebSockets, PostgreSQL, SQLite, SQLAlchemy, Supabase, Redis</dd></div>
+          <div><dt>Full stack &amp; delivery</dt><dd>TypeScript, JavaScript, React, Next.js, Node.js, Express, Docker, GitHub Actions, Azure, AWS</dd></div>
+        </dl>
+        <div class="recognition">
+          <h3>Recognition</h3>
+          <ul class="detail-list"><li><strong>First place, SmartBU Hackathon 2025</strong> · Bennett University, September 19–21, 2025.</li><li><strong>LeetCode 100 Days Badge</strong> · 2026.</li><li><strong>Campus leadership</strong> · NLP Department Lead, Artificial Intelligence Society, and Tech Team Co-Head, CodeChef Bennett.</li></ul>
+          <details><summary>Verified coursework</summary><ul class="detail-list"><li>Complete Agentic AI Bootcamp With LangGraph and LangChain · Udemy, March 2026.</li><li>Complete Generative AI Course With LangChain and Hugging Face · Udemy, June 2026.</li><li>The Bits and Bytes of Computer Networking · Google via Coursera, April 2026.</li><li>Operating Systems Fundamentals · Akamai via Coursera, April 2026.</li><li>Introduction to Microprocessors · Arm via Coursera, March 2026.</li></ul></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="contact" id="contact">
+    <h2>Let’s build something together.</h2>
+    <p>For AI and backend opportunities, project questions, or technical collaborations.</p>
+    <div class="actions"><a class="button" href="mailto:jackivcodes05@gmail.com">Email Jackiv</a><a href="https://www.linkedin.com/in/jackiv-garg">LinkedIn</a><a href="https://github.com/JackivGarg">GitHub</a><a href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Résumé</a><a href="#top">Back to top</a></div>
+  </footer>
 </body>
 </html>
