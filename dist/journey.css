@@ -151,7 +151,7 @@ h1, h2, h3, p, dl, dd, ul { margin: 0; }
 }
 .motion svg, .button svg { flex: none; width: 16px; height: 16px; }
 .motion:hover { background: #ffffff1a; border-color: var(--porcelain); }
-.motion[aria-pressed="true"] { background: var(--porcelain); color: var(--cobalt-deep); }
+html.motion-paused .motion { background: var(--porcelain); color: var(--cobalt-deep); }
 .motion:disabled { opacity: .7; cursor: default; }
 .masthead :focus-visible, .hero :focus-visible, #top :focus-visible { outline-color: var(--porcelain); }
 #scroll-progress {
@@ -429,3 +429,10 @@ footer.contact :focus-visible { outline-color: var(--porcelain); }
 
 .chapter { position: relative; }
 .legacy-anchor { position: absolute; top: 0; left: 0; }
+
+html:not([data-world-state="ready"]) .motion { visibility: hidden; }
+.motion .play-mark, .motion-paused .motion .pause-mark { display: none; }
+.motion-paused .motion .play-mark { display: inline; }
+@media (max-width: 760px) {
+  .world-caption { background: linear-gradient(0deg, var(--cobalt), transparent); }
+}

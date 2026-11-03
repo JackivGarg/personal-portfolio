@@ -75,7 +75,6 @@ function syncMotion() {
   const labelText = reduced.matches ? 'Motion disabled' : off ? 'Resume motion' : 'Pause motion';
   root.classList.toggle('motion-paused', off);
   document.body.classList.toggle('motion-paused', off);
-  motionButton?.setAttribute('aria-pressed', String(off));
   motionButton?.setAttribute('aria-label', reduced.matches ? 'Motion disabled by system settings' : labelText);
   if (motionButton) motionButton.disabled = reduced.matches;
   const label = motionButton?.querySelector('[data-motion-label]');
@@ -160,7 +159,8 @@ function startScene() {
     camera.fov = lerp(chapterSpec[index].lens, chapterSpec[next].lens, local) + (compact ? 2 : 0);
     const lens = Math.tan(camera.fov * Math.PI / 360);
     const distance = camera.position.distanceTo(target);
-    const framedDistance = Math.max(5.55 / (2 * lens * camera.aspect), distance * (compact && camera.aspect > 1.35 ? .78 : 1));
+    const wideCompact = compact && camera.aspect > 1.35;
+    const framedDistance = Math.max(5.55 / (2 * lens * camera.aspect), distance * (wideCompact ? .84 : 1));
     camera.position.sub(target).multiplyScalar(framedDistance / distance).add(target);
     offset.lerp(pointer, off ? 1 : 1 - Math.exp(-4.3 * dt));
     if (!off) {
@@ -168,7 +168,7 @@ function startScene() {
       camera.position.y += offset.y * .12;
       time += dt;
     }
-    target.y += compact ? .24 : .16;
+    target.y += wideCompact ? -.24 : .16;
     camera.lookAt(target);
     camera.updateProjectionMatrix();
     chapterColor.copy(colors[index]).lerp(nextColor.copy(colors[next]), local);
