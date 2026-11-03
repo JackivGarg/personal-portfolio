@@ -10,11 +10,11 @@ const TAU = Math.PI * 2;
 // holds the landmark on the right and keeps the reading column in the DOM.
 export const chapterSpec = [
   { name: 'top',       anchor: [0, 0, 0],       view: [6.5, 4, 9.2],  lens: 35, color: porcelain },
-  { name: 'production',anchor: [10, 0.35, -2],  view: [5.7, 3, 9.5],  lens: 35, color: cyan },
-  { name: 'agentic',   anchor: [20, 0.1, 0.8],  view: [0.8, 3.8, 11], lens: 36, color: porcelain },
-  { name: 'generative',anchor: [30, 0.2, -2.4], view: [-4, 3, 10.2],  lens: 37, color: cyan },
-  { name: 'backend',   anchor: [40, 0.05, 1.4], view: [5.6, 5, 9.4],  lens: 34, color: porcelain },
-  { name: 'toolkit',   anchor: [50, 0.1, -0.3], view: [-1, 2.6, 11],  lens: 36, color: cyan },
+  { name: 'production',anchor: [10, 0.35, -2],  view: [1.45, 1.6, 10.2],  lens: 35, color: cyan },
+  { name: 'agentic',   anchor: [20, 0.1, 0.8],  view: [0.4, 1.2, 10.4], lens: 36, color: porcelain },
+  { name: 'generative',anchor: [30, 0.2, -2.4], view: [-1.45, 1.5, 10.4],  lens: 37, color: cyan },
+  { name: 'backend',   anchor: [40, 0.05, 1.4], view: [1.8, 1.9, 10.2],  lens: 34, color: porcelain },
+  { name: 'toolkit',   anchor: [50, 0.1, -0.3], view: [-.8, 1.45, 10.5],  lens: 36, color: cyan },
 ];
 
 export function buildScene() {
@@ -110,122 +110,175 @@ export function buildScene() {
     return time => { cage.rotation.y = Math.sin(time * .28) * .38; cage.rotation.z = time * .09; };
   }
 
-  function production(parent) {
-    base(parent, 4.75, 3.05);
-    for (const x of [-1.82, -.56, .7, 1.96]) {
-      block(parent, [.13, 3.25, 1.2], [x, .39, 0], darkMetal);
-    }
-    const lights = [];
-    for (let column = 0; column < 3; column++) {
-      const x = -1.18 + column * 1.27;
-      for (let row = 0; row < 5; row++) {
-        const y = -.98 + row * .57;
-        block(parent, [1.08, .36, 1.21], [x, y, 0], metal);
-        block(parent, [.52, .07, .035], [x - .12, y + .01, .624], darkMetal, null);
-        lights.push([x + .33, y + .02, .63]);
+  function stageLabel(parent, text, position, width = 1.75) {
+    const plate = document.createElement('canvas');
+    plate.width = 448;
+    plate.height = 104;
+    const context = plate.getContext('2d');
+    context.fillStyle = '#eaf0ff';
+    context.beginPath();
+    context.roundRect(1, 3, 446, 98, 18);
+    context.fill();
+    context.fillStyle = '#172765';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.font = '700 55px Arial, sans-serif';
+    context.fillText(text, 224, 54, 403);
+    const map = new THREE.CanvasTexture(plate);
+    map.colorSpace = THREE.SRGBColorSpace;
+    const material = new THREE.SpriteMaterial({ map, depthWrite: false, toneMapped: false, fog: false });
+    const sprite = new THREE.Sprite(material);
+    sprite.position.set(...position);
+    sprite.scale.set(width, width * plate.height / plate.width, 1);
+    parent.add(sprite);
+  }
+
+  const tilePositions = [[-1.18, .88, 0], [1.18, .88, 0], [1.18, -.73, 0], [-1.18, -.73, 0]];
+  const traceZ = -.055;
+  const junctionShape = new THREE.OctahedronGeometry(.075);
+  const arrowShape = new THREE.ConeGeometry(.08, .16, 3);
+  const glyphMaterial = accents.get(cyan);
+  const glyphLine = lines.get(porcelain);
+
+  function stroke(parent, points, material = glyphLine) {
+    path(parent, points.map(([x, y]) => [x, y, .4]), material);
+  }
+
+  function drawGlyph(parent, kind) {
+    if (kind === 'document' || kind === 'draft' || kind === 'plan') {
+      stroke(parent, [[-.37, -.25], [-.37, .49], [.16, .49], [.38, .27], [.38, -.25], [-.37, -.25]]);
+      stroke(parent, [[.16, .49], [.16, .27], [.38, .27]]);
+      for (const y of [.12, -.02, -.16]) stroke(parent, [[-.23, y], [.23, y]]);
+    } else if (kind === 'route' || kind === 'attention' || kind === 'socket') {
+      const points = [[-.48,.12], [0,.12], [.47,.34], [.47,-.12]];
+      stroke(parent, [points[0], points[1], points[2]]);
+      stroke(parent, [points[1], points[3]]);
+      pins(parent, points.map(([x,y]) => [x,y,.41]), glyphMaterial, [.1,.1,.09]);
+    } else if (kind === 'extract' || kind === 'token' || kind === 'decoder') {
+      const tiles = [];
+      for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 5; col++) {
+          if ((row + col) % 3 !== 2) tiles.push([-.48 + col * .24, -.14 + row * .24, .42]);
+        }
       }
-      path(parent, [[x, 1.48, -.66], [x, 1.93, -.66], [x, 1.93, .6], [x, 1.56, .6]], lines.get(cyan));
+      pins(parent, tiles, glyphMaterial, [.17,.16,.085]);
+    } else if (kind === 'evaluate' || kind === 'validate' || kind === 'dedupe') {
+      stroke(parent, [[-.48,-.2],[-.48,.42],[.48,.42],[.48,-.2],[-.48,-.2]]);
+      stroke(parent, [[-.25,.1],[-.08,-.06],[.28,.28]], lines.get(cyan));
+      pins(parent, [[-.25,.1,.4],[-.08,-.06,.4],[.28,.28,.4]], glyphMaterial, [.07,.07,.07]);
+    } else if (kind === 'improve' || kind === 'delivery') {
+      ring(parent, .34, glyphMaterial, [0,.12,.42], [0,0,.65], 5.05);
+      stroke(parent, [[.14,.45],[.33,.4],[.33,.23]]);
+      pins(parent, [[0,.12,.42]], glyphMaterial, [.115,.115,.115]);
+    } else if (kind === 'database') {
+      for (const y of [-.06,.12,.3]) {
+        const disc = new THREE.Mesh(new THREE.CylinderGeometry(.37,.37,.105,20), darkMetal);
+        disc.position.set(0,y,.38);
+        disc.add(new THREE.LineSegments(new THREE.EdgesGeometry(disc.geometry), glyphLine));
+        parent.add(disc);
+      }
+    } else if (kind === 'client' || kind === 'fullstack') {
+      stroke(parent, [[-.52,-.16],[-.52,.42],[.52,.42],[.52,-.16],[-.52,-.16]]);
+      stroke(parent, [[-.5,.26],[.5,.26]]);
+      stroke(parent, [[-.26,.1],[-.37,.01],[-.26,-.08]]);
+      stroke(parent, [[.26,.1],[.37,.01],[.26,-.08]]);
+    } else {
+      const facets = new THREE.Mesh(new THREE.OctahedronGeometry(.33), glyphMaterial);
+      facets.position.set(0,.13,.34);
+      facets.rotation.set(.24,.41,.13);
+      parent.add(facets);
     }
-    pins(parent, lights, accents.get(cyan), [.075, .044, .035]);
-    ring(parent, 1.8, darkMetal, [.06, -.7, .02], [Math.PI / 2, 0, 0]);
-    const packet = block(parent, [.12, .07, .04], [0, 1.93, .6], accents.get(porcelain), null);
-    return time => { packet.position.x = Math.sin(time * .95) * 1.25; };
+  }
+
+  function schematic(parent, stages, options = {}) {
+    const cells = stages.map(([label, glyph], index) => {
+      const tile = new THREE.Group();
+      const [x, y, z] = tilePositions[index];
+      tile.position.set(x, y, z);
+      const face = new THREE.MeshStandardMaterial({
+        color: graphite, roughness: .53, metalness: .35,
+        emissive: cyan, emissiveIntensity: .08
+      });
+      block(tile, [1.88, 1.22, .24], [0, 0, 0], metal);
+      block(tile, [1.68, .99, .13], [0, .03, .17], face);
+      drawGlyph(tile, glyph);
+      stageLabel(tile, label, [0, -.43, .48]);
+      parent.add(tile);
+      return { tile, face };
+    });
+    const routes = [];
+    function route(from, to, color = cyan, directed = true) {
+      const start = new THREE.Vector3(...from).setZ(traceZ);
+      const end = new THREE.Vector3(...to).setZ(traceZ);
+      path(parent, [start.toArray(), end.toArray()], lines.get(color));
+      const marker = new THREE.Mesh(directed ? arrowShape : junctionShape, accents.get(color));
+      marker.position.lerpVectors(start, end, .5);
+      if (directed) marker.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), end.clone().sub(start).normalize());
+      parent.add(marker);
+      routes.push([start, end]);
+    }
+    if (options.hub) {
+      const hub = new THREE.Mesh(new THREE.DodecahedronGeometry(.34), darkMetal);
+      hub.add(new THREE.LineSegments(new THREE.EdgesGeometry(hub.geometry), glyphLine));
+      parent.add(hub);
+      for (const position of tilePositions) route([0, .075, 0], position, porcelain, false);
+    } else {
+      for (let i = 0; i < cells.length - 1; i++) route(tilePositions[i], tilePositions[i + 1]);
+      if (options.feedback) route(tilePositions[3], tilePositions[0], porcelain);
+    }
+    if (options.monitor) {
+      path(parent, [[-1.18,-1.35,traceZ],[-1.18,-1.73,traceZ],[0,-1.73,traceZ]], lines.get(porcelain));
+      stageLabel(parent, 'Monitor', [.53, -1.73, .11], 1.38);
+    }
+    if (options.feedback) {
+      stageLabel(parent, 'Next pass', [0, .075, .07], 1.4);
+    }
+    const packet = new THREE.Mesh(junctionShape, accents.get(porcelain));
+    packet.scale.setScalar(1.4);
+    parent.add(packet);
+    return time => {
+      const progress = THREE.MathUtils.clamp(time / 6, 0, 1);
+      const step = progress * routes.length;
+      const routeIndex = Math.min(Math.floor(step), routes.length - 1);
+      const [start, end] = routes[routeIndex];
+      packet.position.lerpVectors(start, end, step - routeIndex);
+      packet.position.z = .55;
+      const active = Math.min(cells.length - 1, Math.floor(progress * cells.length));
+      for (const [index, cell] of cells.entries()) {
+        cell.face.emissiveIntensity = index === active ? .48 : index < active ? .17 : .035;
+        cell.tile.position.z = index === active ? .12 : 0;
+      }
+    };
+  }
+
+  function production(parent) {
+    return schematic(parent, [
+      ['Documents', 'document'], ['Route', 'route'], ['Extract', 'extract'], ['Validate', 'validate']
+    ], { monitor: true });
   }
 
   function agentGraph(parent) {
-    base(parent, 4.8, 3.05);
-    const nodes = [[0, .5, .34], [-1.95, 1.2, -.48], [1.95, 1.2, -.48], [-1.3, -.35, .9], [1.3, -.35, .9], [0, 1.95, -.85]];
-    const edges = [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 5], [2, 5], [1, 3], [2, 4], [3, 4]];
-    const nodeShape = new THREE.OctahedronGeometry(.42, 0);
-    const nodeEdge = new THREE.EdgesGeometry(nodeShape);
-    for (const [i, position] of nodes.entries()) {
-      const object = new THREE.Mesh(nodeShape, metal);
-      object.position.set(...position);
-      object.scale.setScalar(i === 0 ? 1.55 : 1);
-      object.add(new THREE.LineSegments(nodeEdge, lines.get(i % 2 ? cyan : porcelain)));
-      parent.add(object);
-      path(parent, [[position[0], -1.22, position[2]], position]);
-    }
-    for (const [start, end] of edges) path(parent, [nodes[start], nodes[end]], start === 0 ? lines.get(porcelain) : structure);
-    const cursor = block(parent, [.09, .09, .09], nodes[0], accents.get(cyan), null);
-    const from = new THREE.Vector3();
-    const to = new THREE.Vector3();
-    return time => {
-      const t = time * .6;
-      const [start, end] = edges[Math.floor(t) % edges.length];
-      cursor.position.copy(from.fromArray(nodes[start])).lerp(to.fromArray(nodes[end]), t % 1);
-    };
+    return schematic(parent, [
+      ['Plan', 'plan'], ['Generate', 'draft'], ['Evaluate', 'evaluate'], ['Improve', 'improve']
+    ], { feedback: true });
   }
 
   function generator(parent) {
-    base(parent, 4.8, 3.2);
-    const scanner = new THREE.Group();
-    scanner.position.y = .36;
-    parent.add(scanner);
-    for (let i = 0; i < 5; i++) {
-      const z = -.84 + i * .42;
-      ring(scanner, 1.5 - i * .09, accents.get(i % 2 ? cyan : porcelain), [0, 0, z], [0, 0, i * .61], TAU * .78);
-      ring(scanner, 1.64 - i * .09, darkMetal, [0, 0, z], [0, 0, 0]);
-    }
-    for (const x of [-1.72, 1.72]) {
-      block(parent, [.25, 2.45, .53], [x, .09, -.42], metal);
-      block(parent, [.28, .12, .58], [x, 1.36, -.42], darkMetal);
-    }
-    const positions = [];
-    for (let x = -4; x <= 4; x++) {
-      for (let y = -4; y <= 4; y++) {
-        const d = Math.hypot(x, y);
-        if (d < 4.5 && (x + y) % 3 !== 1) positions.push([x * .21, .36 + y * .21, .94 - Math.cos(x + y) * .18]);
-      }
-    }
-    const field = new THREE.Group();
-    parent.add(field);
-    pins(field, positions, accents.get(cyan), [.038, .038, .038]);
-    return time => {
-      scanner.rotation.z = Math.sin(time * .28) * .35;
-      field.position.z = Math.sin(time * .88) * .16;
-    };
+    return schematic(parent, [
+      ['BPE tokens', 'token'], ['Causal attention', 'attention'], ['Decoder', 'decoder'], ['Evaluate', 'evaluate']
+    ]);
   }
 
   function backend(parent) {
-    base(parent, 4.7, 3.5);
-    for (let layer = 0; layer < 4; layer++) {
-      const y = -.97 + layer * .63;
-      block(parent, [3.15, .18, 2.45], [0, y, 0], layer % 2 ? metal : darkMetal);
-      for (const side of [-1, 1]) {
-        path(parent, [[side * 1.4, y + .105, -1.02], [side * 1.4, y + .105, .75], [side * .75, y + .105, 1.02], [0, y + .105, 1.02]], lines.get(layer % 2 ? cyan : porcelain));
-      }
-    }
-    for (const x of [-1.22, 1.22]) {
-      for (const z of [-.95, .95]) block(parent, [.09, 2.27, .09], [x, -.13, z], darkMetal, structure);
-    }
-    const center = block(parent, [1.02, .28, .76], [0, 1.21, 0], metal, lines.get(porcelain));
-    const squares = [];
-    for (let i = -3; i <= 3; i++) squares.push([i * .16, 1.37, -.4], [i * .16, 1.37, .4]);
-    pins(parent, squares, accents.get(cyan), [.06, .025, .14]);
-    return time => { center.position.y = 1.21 + Math.sin(time * .75) * .06; };
+    return schematic(parent, [
+      ['Client', 'client'], ['WebSocket', 'socket'], ['Dedupe', 'dedupe'], ['SQLite', 'database']
+    ]);
   }
 
   function toolkit(parent) {
-    base(parent, 4.65, 3.2);
-    const hub = new THREE.Mesh(new THREE.DodecahedronGeometry(.74), metal);
-    hub.position.y = .31;
-    hub.add(new THREE.LineSegments(new THREE.EdgesGeometry(hub.geometry), lines.get(porcelain)));
-    parent.add(hub);
-    const modules = new THREE.Group();
-    modules.position.y = .31;
-    parent.add(modules);
-    for (let i = 0; i < 7; i++) {
-      const angle = i * TAU / 7;
-      const x = Math.cos(angle) * 1.75;
-      const z = Math.sin(angle) * 1.75;
-      const y = Math.sin(angle * 2) * .55;
-      const module = block(modules, [.53, .33, .53], [x, y, z], metal, lines.get(i % 2 ? porcelain : cyan));
-      module.rotation.y = -angle;
-      path(modules, [[0, 0, 0], [x * .62, y, z * .62], [x, y, z]]);
-    }
-    ring(parent, 1.82, accents.get(cyan), [0, .31, 0], [Math.PI / 2, .2, 0], TAU * .9);
-    return time => { modules.rotation.y = time * .13; hub.rotation.set(.22, time * .23, .18); };
+    return schematic(parent, [
+      ['AI engineering', 'ai'], ['Backend & data', 'database'], ['Full stack', 'fullstack'], ['Delivery', 'delivery']
+    ], { hub: true });
   }
 
   const build = [core, production, agentGraph, generator, backend, toolkit];

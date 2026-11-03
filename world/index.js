@@ -12,11 +12,11 @@ const navigation = Array.from(document.querySelectorAll('[data-nav]'));
 const meter = document.querySelector('#scroll-progress');
 const motionButton = document.querySelector('#motion-toggle');
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-const finePointer = window.matchMedia('(pointer: fine)');
 const { clamp, damp, lerp } = THREE.MathUtils;
 const reducedByUser = () => reduced.matches || paused;
 let paused = false;
 let exact = 0;
+let chapterProgress = 0;
 let active = -1;
 let anchors = [];
 let maxScroll = 1;
@@ -41,6 +41,7 @@ function updateStory() {
   const next = Math.min(index + 1, anchors.length - 1);
   const interval = anchors[next] - anchors[index];
   const local = interval > 0 ? (y - anchors[index]) / interval : 0;
+  chapterProgress = index + local;
   exact = index + THREE.MathUtils.smoothstep(local, .43, 1);
   const current = Math.min(Math.round(exact), chapters.length - 1);
   const progress = y / maxScroll;
@@ -107,8 +108,6 @@ function startScene() {
   const positions = chapterSpec.map((spec, index) => centers[index].clone().add(new THREE.Vector3(...spec.view)));
   const cameraPath = new THREE.CatmullRomCurve3(positions, false, 'catmullrom', .43);
   const targetPath = new THREE.CatmullRomCurve3(centers, false, 'catmullrom', .38);
-  const pointer = new THREE.Vector2();
-  const offset = new THREE.Vector2();
   const target = new THREE.Vector3();
   const chapterColor = new THREE.Color();
   const nextColor = new THREE.Color();
@@ -116,7 +115,6 @@ function startScene() {
   let smooth = exact;
   let lastTimestamp = 0;
   let frame = 0;
-  let time = 0;
   let lost = false;
   let compact = false;
   let inView = true;
@@ -160,14 +158,9 @@ function startScene() {
     const lens = Math.tan(camera.fov * Math.PI / 360);
     const distance = camera.position.distanceTo(target);
     const wideCompact = compact && camera.aspect > 1.35;
-    const framedDistance = Math.max(5.55 / (2 * lens * camera.aspect), distance * (wideCompact ? .84 : 1));
+    const compactScale = wideCompact ? lerp(.84, .72, clamp(smooth, 0, 1)) : 1;
+    const framedDistance = Math.max(5.55 / (2 * lens * camera.aspect), distance * compactScale);
     camera.position.sub(target).multiplyScalar(framedDistance / distance).add(target);
-    offset.lerp(pointer, off ? 1 : 1 - Math.exp(-4.3 * dt));
-    if (!off) {
-      camera.position.x += offset.x * .18;
-      camera.position.y += offset.y * .12;
-      time += dt;
-    }
     target.y += wideCompact ? -.24 : .16;
     camera.lookAt(target);
     camera.updateProjectionMatrix();
@@ -181,7 +174,7 @@ function startScene() {
     rim.target.updateMatrixWorld();
     for (const [i, landmark] of landmarks.entries()) {
       landmark.group.visible = Math.abs(i - smooth) < 1.35;
-      if (landmark.group.visible) landmark.animate(off ? 0 : time);
+      if (landmark.group.visible) landmark.animate(off ? 0 : clamp(chapterProgress - i, 0, 1) * 6);
     }
     renderer.render(scene, camera);
     if (root.dataset.worldState !== 'ready') root.dataset.worldState = 'ready';
@@ -192,18 +185,14 @@ function startScene() {
       slowFrames = 0;
       resize();
     }
-    if (!off) wake();
+    if (!off && Math.abs(smooth - exact) > .001) wake();
+    else lastTimestamp = 0;
   }
 
   function wake() {
     if (!frame && !lost && !document.hidden && inView) frame = requestAnimationFrame(render);
   }
 
-  listen(window, 'pointermove', event => {
-    if (!finePointer.matches || reducedByUser()) return;
-    pointer.set(event.clientX / innerWidth * 2 - 1, 1 - event.clientY / innerHeight * 2);
-  }, { passive: true });
-  listen(document.documentElement, 'pointerleave', () => pointer.set(0, 0));
   listen(document, 'visibilitychange', () => {
     lastTimestamp = 0;
     wake();
@@ -239,6 +228,7 @@ function startScene() {
     scene.traverse(object => {
       if (object.geometry) resources.add(object.geometry);
       if (object.material) resources.add(object.material);
+      if (object.material?.map) resources.add(object.material.map);
       if (object.isInstancedMesh) resources.add(object);
     });
     for (const resource of resources) resource.dispose();
