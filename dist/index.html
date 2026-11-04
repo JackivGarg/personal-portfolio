@@ -8,19 +8,13 @@
   <title>Jackiv Garg — AI & Backend Engineering</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="journey.css">
+  <link rel="stylesheet" href="journey-panel.css">
   <script src="world.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="masthead">
     <a href="#top" class="brand"><span class="mark" aria-hidden="true">JG</span><span>Jackiv Garg</span></a>
-    <nav class="chapter-nav" aria-label="Chapters">
-      <a href="#production" data-nav="production">Experience</a>
-      <a href="#agentic" data-nav="agentic">Agentic AI</a>
-      <a href="#generative" data-nav="generative">Generative AI</a>
-      <a href="#backend" data-nav="backend">Backend</a>
-      <a href="#toolkit" data-nav="toolkit">Toolkit</a>
-    </nav>
     <div class="masthead-actions">
       <button type="button" id="motion-toggle" class="motion" aria-label="Pause motion"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path class="pause-mark" d="M7 5v10m6-10v10"/><path class="play-mark" d="m7 5 8 5-8 5z"/></svg><span data-motion-label>Pause motion</span></button>
       <a class="resume" href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Résumé</a>
@@ -28,134 +22,209 @@
     <div id="scroll-progress" aria-hidden="true"></div>
   </header>
 
-  <div class="stage">
-    <svg class="world-poster" aria-hidden="true" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="board-top" x2="1" y2="1"><stop stop-color="#8da9ff"/><stop offset="1" stop-color="#334fbc"/></linearGradient>
-        <pattern id="board-grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0v18" fill="none" stroke="#c4d4ff" stroke-opacity=".22"/></pattern>
-      </defs>
-      <g transform="translate(25 105)" fill="none" stroke="#b5caff" stroke-linejoin="round">
-        <path d="M55 330 335 164 623 323 343 489Z" fill="#182c88" stroke-opacity=".45"/>
-        <path d="M55 296 335 130 623 289 343 455Z" fill="url(#board-top)"/>
-        <path d="M55 296 343 455v34L55 330ZM343 455l280-166v34L343 489Z" fill="#263d9e"/>
-        <path d="M55 296 335 130 623 289 343 455Z" fill="url(#board-grid)"/>
-        <path d="m185 280 150-88 168 92-151 89Z" fill="#1d328f" stroke="#b6e6ff"/>
-        <path d="m257 279 81-48 86 47-81 48Z" fill="#b2d0fa" stroke="#e0f4ff"/>
-        <path d="m257 279 86 47v20l-86-47ZM343 326l81-48v20l-81 48Z" fill="#607ed6"/>
-        <path d="m164 315 53-31 39 21m224-60-44 25 41 23 61-36m-238-48 42 23m33 119 33 18-51 31m-126-57-35 20" stroke="#caeaff" stroke-width="2"/>
-        <circle cx="164" cy="315" r="4" fill="#b6e6ff"/><circle cx="538" cy="257" r="4" fill="#b6e6ff"/><circle cx="357" cy="400" r="4" fill="#b6e6ff"/>
-      </g>
-    </svg>
-    <canvas id="world" aria-hidden="true"></canvas>
-    <div class="world-caption">
-      <span data-label="top">AI and backend systems</span><span data-label="production">Munshot document workflow</span><span data-label="agentic">The Loop generation cycle</span><span data-label="generative">StorySeed training pipeline</span><span data-label="backend">Relay message delivery</span><span data-label="toolkit">Engineering toolkit</span>
-      <a class="scene-link" data-label="top" href="#production">Explore the work</a>
-      <a class="scene-link" data-label="production" href="portfolio.html#experience">Munshot details</a>
-      <a class="scene-link" data-label="agentic" href="portfolio.html#project/loop">The Loop details</a>
-      <a class="scene-link" data-label="generative" href="portfolio.html#project/storyseed">StorySeed details</a>
-      <a class="scene-link" data-label="backend" href="portfolio.html#project/relay">Relay details</a>
-      <a class="scene-link" data-label="toolkit" href="portfolio.html#about">Toolkit details</a>
-    </div>
-  </div>
-
-  <main id="main" class="journey">
-    <section id="top" class="chapter hero" data-chapter="top" aria-labelledby="hero-title">
-      <div class="chapter-inner">
+  <main class="portfolio-shell">
+    <aside class="profile-pane" aria-labelledby="hero-title">
+      <div class="profile-intro">
         <h1 id="hero-title" class="hero-title">Jackiv Garg</h1>
-        <p class="hero-intro">I build the systems behind intelligent software.</p>
-        <p class="lede">Agentic AI workflows, generative models, and Python backends. I like following a system from its first design decision through evaluation, failure handling, and deployment.</p>
-        <div class="actions"><a href="#production" class="button">Explore the work <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 4v11m-5-5 5 5 5-5"/></svg></a><a href="https://github.com/JackivGarg" class="text-link">GitHub</a></div>
-        <p class="scroll-cue">Scroll through six engineering chapters</p>
-      </div>
-    </section>
-
-    <section id="production" class="chapter" data-chapter="production" aria-labelledby="production-title">
-      <span id="work-production" class="legacy-anchor" aria-hidden="true"></span>
-      <span id="experience" class="legacy-anchor" aria-hidden="true"></span>
-      <div class="chapter-inner">
-        <h2 id="production-title">AI in production</h2>
-        <p class="case-label">Munshot · Agentic AI Developer</p>
-        <p class="lede">I worked on Python APIs and LLM workflows that route queries, extract structured data from documents, and validate the output before it moves downstream.</p>
-        <div class="facts"><dl><div><dt>92%</dt><dd>structured KPI extraction accuracy</dd></div><div><dt>25%</dt><dd>lower end-to-end workflow latency</dd></div><div><dt>500+</dt><dd>daily pipeline runs monitored</dd></div></dl></div>
-        <ul class="detail-list">
-          <li><strong>Routing.</strong> Added requirement-aware routing and handled extraction edge cases, reducing extraction errors by 18%.</li>
-          <li><strong>Throughput.</strong> Optimized multi-step LLM workflows and routing endpoints, improving throughput by 30%.</li>
-          <li><strong>Observability.</strong> Built dashboards for accuracy and failure patterns, reducing regression detection time by 40%.</li>
-        </ul>
-        <p class="evidence">Performance figures as reported in my résumé.</p>
-        <div class="source-links"><a href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Read the résumé</a></div>
-      </div>
-    </section>
-
-    <section id="agentic" class="chapter" data-chapter="agentic" aria-labelledby="agentic-title">
-      <span id="work-agentic" class="legacy-anchor" aria-hidden="true"></span>
-      <div class="chapter-inner">
-        <h2 id="agentic-title">An agent loop you can inspect</h2>
-        <p class="case-label">The Loop · React, FastAPI, SQLite, Groq</p>
-        <p class="lede">The Loop turns a brief into a website through four stages: plan, generate, evaluate, and improve. Each pass leaves a draft and an evaluation record, so you can see what changed and keep the best version.</p>
-        <ol class="detail-list">
-          <li><strong>Evaluation.</strong> Deterministic checks and a model rubric score each draft. Evaluation criteria are frozen per run so later edits do not change the comparison.</li>
-          <li><strong>Durability.</strong> The queue saves state and checkpoints. Queued jobs recover after a restart, while interrupted runs retain their drafts without automatically replaying paid inference.</li>
-          <li><strong>Isolation.</strong> Generated HTML opens in a sandbox. Projects have per-user ownership checks, and evaluation profiles support rollback.</li>
-        </ol>
-        <p class="evidence">The worker is single-instance. Cancellation happens between stages, and static checks complement browser testing.</p>
-        <div class="source-links"><a href="https://github.com/JackivGarg/THE-LOOP">Read the source and architecture</a><a href="portfolio.html#project/loop">Open project detail</a></div>
-      </div>
-    </section>
-
-    <section id="generative" class="chapter" data-chapter="generative" aria-labelledby="generative-title">
-      <span id="work-generative" class="legacy-anchor" aria-hidden="true"></span>
-      <div class="chapter-inner">
-        <h2 id="generative-title">Training from scratch</h2>
-        <p class="case-label">StorySeed · Tokenization, causal attention, evaluation</p>
-        <p class="lede">I built a small English story model from random initialization. The work moved from a character baseline through byte-pair encoding, causal attention, a decoder, and repeatable evaluation.</p>
-        <div class="facts"><dl><div><dt>8.47M</dt><dd>model parameters</dd></div><div><dt>4,096</dt><dd>BPE vocabulary</dd></div><div><dt>256</dt><dd>token context</dd></div></dl></div>
-        <p>The recovery model was trained for 48,000 updates. On the same 200 reserved stories, bits per UTF-8 byte went from 1.708 to 0.626. The comparison measures the combined changes.</p>
-        <p class="evidence">Story coherence remains experimental. The public repository documents the evaluation and keeps trained weights local.</p>
-        <div class="source-links"><a href="https://github.com/JackivGarg/StorySeed">Explore StorySeed</a><a href="https://github.com/JackivGarg/StorySeed/blob/main/docs/RECOVERY_MODEL_CARD.md">Read the model card</a></div>
-      </div>
-    </section>
-
-    <section id="backend" class="chapter" data-chapter="backend" aria-labelledby="backend-title">
-      <span id="selected-work" class="legacy-anchor" aria-hidden="true"></span>
-      <span id="work-backend" class="legacy-anchor" aria-hidden="true"></span>
-      <span id="work" class="legacy-anchor" aria-hidden="true"></span>
-      <div class="chapter-inner">
-        <h2 id="backend-title">Behind the interface</h2>
-        <p class="lede">I care about the behavior users notice when a connection drops, a message retries, or a workflow has to recover.</p>
-        <div class="work-list">
-          <article><h3>Relay</h3><p>Real-time messaging with authenticated WebSockets, client-generated IDs for idempotent sends, and SQLite persistence. The Azure deployment used Docker Compose, Caddy TLS, health checks, and backups.</p><p class="evidence">Educational Signal-inspired build with mocked OTP and server-side message storage.</p><a href="https://github.com/JackivGarg/SIGNAL-CLONE">Relay source</a></article>
-          <article><h3>VersitySync</h3><p>Led a six-person team building interview practice for students. Live sessions combine voice transcription, interruption handling, and adaptive follow-ups across role-based and coding interviews.</p><a href="portfolio.html#project/versity">VersitySync details</a></article>
-          <article><h3>Vehicle Insurance Prediction</h3><p>A six-stage ML pipeline with containerized FastAPI inference and GitHub Actions automation for building images and publishing to Amazon ECR.</p><a href="https://github.com/JackivGarg/Vehicle-Insurance-">Pipeline source</a></article>
-        </div>
-        <div class="source-links"><a href="portfolio.html#work">Browse the project explorer</a><a href="https://github.com/JackivGarg?tab=repositories">GitHub profile projects</a></div>
-      </div>
-    </section>
-
-    <section id="toolkit" class="chapter" data-chapter="toolkit" aria-labelledby="toolkit-title">
-      <span id="work-toolkit" class="legacy-anchor" aria-hidden="true"></span>
-      <span id="about" class="legacy-anchor" aria-hidden="true"></span>
-      <div class="chapter-inner">
-        <h2 id="toolkit-title">Toolkit and recognition</h2>
-        <p class="lede">B.Tech in Computer Science &amp; Engineering at Bennett University, expected 2028. CGPA 8.78.</p>
-        <dl class="skill-list">
-          <div><dt>AI engineering</dt><dd>LangGraph, LangChain, retrieval-augmented generation, model evaluation, Hugging Face, scikit-learn</dd></div>
-          <div><dt>Backend &amp; data</dt><dd>Python, FastAPI, REST, WebSockets, PostgreSQL, SQLite, SQLAlchemy, Supabase, Redis</dd></div>
-          <div><dt>Full stack &amp; delivery</dt><dd>TypeScript, JavaScript, React, Next.js, Node.js, Express, Docker, GitHub Actions, Azure, AWS</dd></div>
-        </dl>
-        <div class="recognition">
-          <h3>Recognition</h3>
-          <ul class="detail-list"><li><strong>First place, SmartBU Hackathon 2025</strong> · Bennett University, September 19–21, 2025.</li><li><strong>LeetCode 100 Days Badge</strong> · 2026.</li><li><strong>Campus leadership</strong> · NLP Department Lead, Artificial Intelligence Society, and Tech Team Co-Head, CodeChef Bennett.</li></ul>
-          <details><summary>Verified coursework</summary><ul class="detail-list"><li>Complete Agentic AI Bootcamp With LangGraph and LangChain · Udemy, March 2026.</li><li>Complete Generative AI Course With LangChain and Hugging Face · Udemy, June 2026.</li><li>The Bits and Bytes of Computer Networking · Google via Coursera, April 2026.</li><li>Operating Systems Fundamentals · Akamai via Coursera, April 2026.</li><li>Introduction to Microprocessors · Arm via Coursera, March 2026.</li></ul></details>
+        <p class="hero-intro">AI and backend engineering</p>
+        <p class="lede">I build agentic AI workflows, train small language models, and develop Python backends.</p>
+        <div class="actions">
+          <a href="#production" class="button">Explore the work <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10h11m-5-5 5 5-5 5"/></svg></a>
         </div>
       </div>
-    </section>
+      <nav class="chapter-nav" aria-label="Chapters">
+        <a href="#top" data-nav="top" aria-current="location">About me</a>
+        <a href="#production" data-nav="production">Experience</a>
+        <a href="#agentic" data-nav="agentic">Agentic AI</a>
+        <a href="#generative" data-nav="generative">Generative AI</a>
+        <a href="#backend" data-nav="backend">Backend</a>
+        <a href="#toolkit" data-nav="toolkit">Toolkit</a>
+      </nav>
+      <div class="profile-links">
+        <a href="https://github.com/JackivGarg">GitHub</a>
+        <a href="https://www.linkedin.com/in/jackiv-garg">LinkedIn</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </aside>
+
+    <div id="main" class="right-pane" role="region" tabindex="0" aria-label="Engineering portfolio">
+      <div class="stage">
+        <svg class="world-poster" aria-hidden="true" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="board-top" x2="1" y2="1"><stop stop-color="#8da9ff"/><stop offset="1" stop-color="#334fbc"/></linearGradient>
+            <pattern id="board-grid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0v18" fill="none" stroke="#c4d4ff" stroke-opacity=".22"/></pattern>
+          </defs>
+          <g transform="translate(25 105)" fill="none" stroke="#b5caff" stroke-linejoin="round">
+            <path d="M55 330 335 164 623 323 343 489Z" fill="#182c88" stroke-opacity=".45"/>
+            <path d="M55 296 335 130 623 289 343 455Z" fill="url(#board-top)"/>
+            <path d="M55 296 343 455v34L55 330ZM343 455l280-166v34L343 489Z" fill="#263d9e"/>
+            <path d="M55 296 335 130 623 289 343 455Z" fill="url(#board-grid)"/>
+            <path d="m185 280 150-88 168 92-151 89Z" fill="#1d328f" stroke="#b6e6ff"/>
+            <path d="m257 279 81-48 86 47-81 48Z" fill="#b2d0fa" stroke="#e0f4ff"/>
+            <path d="m257 279 86 47v20l-86-47ZM343 326l81-48v20l-81 48Z" fill="#607ed6"/>
+            <path d="m164 315 53-31 39 21m224-60-44 25 41 23 61-36m-238-48 42 23m33 119 33 18-51 31m-126-57-35 20" stroke="#caeaff" stroke-width="2"/>
+            <circle cx="164" cy="315" r="4" fill="#b6e6ff"/><circle cx="538" cy="257" r="4" fill="#b6e6ff"/><circle cx="357" cy="400" r="4" fill="#b6e6ff"/>
+          </g>
+        </svg>
+        <canvas id="world" aria-hidden="true"></canvas>
+        <div class="world-caption">
+          <span data-label="top">AI and backend systems</span><span data-label="production">Munshot document workflow</span><span data-label="agentic">The Loop generation cycle</span><span data-label="generative">StorySeed training pipeline</span><span data-label="backend">Relay message delivery</span><span data-label="toolkit">Engineering toolkit</span>
+          <a class="scene-link" data-label="top" href="#production">Explore the work</a>
+          <a class="scene-link" data-label="production" href="portfolio.html#experience">Munshot details</a>
+          <a class="scene-link" data-label="agentic" href="portfolio.html#project/loop">The Loop details</a>
+          <a class="scene-link" data-label="generative" href="portfolio.html#project/storyseed">StorySeed details</a>
+          <a class="scene-link" data-label="backend" href="portfolio.html#project/relay">Relay details</a>
+          <a class="scene-link" data-label="toolkit" href="portfolio.html#about">Toolkit details</a>
+        </div>
+      </div>
+
+      <div class="journey">
+        <section id="top" class="chapter" data-chapter="top" aria-labelledby="about-me-title">
+          <div class="chapter-inner">
+            <h2 id="about-me-title">About me</h2>
+            <p class="lede">I study computer science and engineering at Bennett University. I’m interested in how software behaves in practice, from evaluating a model’s output to recovering an interrupted workflow.</p>
+            <a href="#production" class="scroll-cue">Scroll to see the scene change with each chapter <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 4v11m-5-5 5 5 5-5"/></svg></a>
+          </div>
+        </section>
+
+        <section id="production" class="chapter" data-chapter="production" aria-labelledby="production-title">
+          <span id="work-production" class="legacy-anchor" aria-hidden="true"></span>
+          <span id="experience" class="legacy-anchor" aria-hidden="true"></span>
+          <div class="chapter-inner">
+            <h2 id="production-title">AI in production</h2>
+            <p class="case-label">Munshot · Agentic AI Developer</p>
+            <p class="lede">I worked on Python APIs and LLM workflows that route queries, extract structured data from documents, and validate the output before it moves downstream.</p>
+            <details class="chapter-details">
+              <summary>Workflow outcomes and measurements</summary>
+              <div class="chapter-details-body">
+                <div class="facts"><dl><div><dt>92%</dt><dd>structured KPI extraction accuracy</dd></div><div><dt>25%</dt><dd>lower end-to-end workflow latency</dd></div><div><dt>500+</dt><dd>daily pipeline runs monitored</dd></div></dl></div>
+                <ul class="detail-list">
+                  <li><strong>Routing.</strong> Added requirement-aware routing and handled extraction edge cases, reducing extraction errors by 18%.</li>
+                  <li><strong>Throughput.</strong> Optimized multi-step LLM workflows and routing endpoints, improving throughput by 30%.</li>
+                  <li><strong>Observability.</strong> Built dashboards for accuracy and failure patterns, reducing regression detection time by 40%.</li>
+                </ul>
+                <p class="evidence">Performance figures as reported in my résumé.</p>
+              </div>
+            </details>
+            <div class="source-links"><a href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Read the résumé</a></div>
+          </div>
+        </section>
+
+        <section id="agentic" class="chapter" data-chapter="agentic" aria-labelledby="agentic-title">
+          <span id="work-agentic" class="legacy-anchor" aria-hidden="true"></span>
+          <div class="chapter-inner">
+            <h2 id="agentic-title">An agent loop you can inspect</h2>
+            <p class="case-label">The Loop · React, FastAPI, SQLite, Groq</p>
+            <p class="lede">The Loop turns a brief into a website through four stages: plan, generate, evaluate, and improve. Each pass leaves a draft and an evaluation record, so you can see what changed and keep the best version.</p>
+            <details class="chapter-details">
+              <summary>Evaluation, recovery, and isolation</summary>
+              <div class="chapter-details-body">
+                <ol class="detail-list">
+                  <li><strong>Evaluation.</strong> Deterministic checks and a model rubric score each draft. Evaluation criteria are frozen per run so later edits do not change the comparison.</li>
+                  <li><strong>Durability.</strong> The queue saves state and checkpoints. Queued jobs recover after a restart, while interrupted runs retain their drafts without automatically replaying paid inference.</li>
+                  <li><strong>Isolation.</strong> Generated HTML opens in a sandbox. Projects have per-user ownership checks, and evaluation profiles support rollback.</li>
+                </ol>
+                <p class="evidence">The worker is single-instance. Cancellation happens between stages, and static checks complement browser testing.</p>
+              </div>
+            </details>
+            <div class="source-links"><a href="https://github.com/JackivGarg/THE-LOOP">Read the source and architecture</a><a href="portfolio.html#project/loop">Open project detail</a></div>
+          </div>
+        </section>
+
+        <section id="generative" class="chapter" data-chapter="generative" aria-labelledby="generative-title">
+          <span id="work-generative" class="legacy-anchor" aria-hidden="true"></span>
+          <div class="chapter-inner">
+            <h2 id="generative-title">Training from scratch</h2>
+            <p class="case-label">StorySeed · Tokenization, causal attention, evaluation</p>
+            <p class="lede">I built a small English story model from random initialization. The work moved from a character baseline through byte-pair encoding, causal attention, a decoder, and repeatable evaluation.</p>
+            <details class="chapter-details">
+              <summary>Model and evaluation results</summary>
+              <div class="chapter-details-body">
+                <div class="facts"><dl><div><dt>8.47M</dt><dd>model parameters</dd></div><div><dt>4,096</dt><dd>BPE vocabulary</dd></div><div><dt>256</dt><dd>token context</dd></div></dl></div>
+                <p>The recovery model was trained for 48,000 updates. On the same 200 reserved stories, bits per UTF-8 byte went from 1.708 to 0.626. The comparison measures the combined changes.</p>
+                <p class="evidence">Story coherence remains experimental. The public repository documents the evaluation and keeps trained weights local.</p>
+              </div>
+            </details>
+            <div class="source-links"><a href="https://github.com/JackivGarg/StorySeed">Explore StorySeed</a><a href="https://github.com/JackivGarg/StorySeed/blob/main/docs/RECOVERY_MODEL_CARD.md">Read the model card</a></div>
+          </div>
+        </section>
+
+        <section id="backend" class="chapter" data-chapter="backend" aria-labelledby="backend-title">
+          <span id="selected-work" class="legacy-anchor" aria-hidden="true"></span>
+          <span id="work-backend" class="legacy-anchor" aria-hidden="true"></span>
+          <span id="work" class="legacy-anchor" aria-hidden="true"></span>
+          <div class="chapter-inner">
+            <h2 id="backend-title">Behind the interface</h2>
+            <p class="lede">I built Relay to explore how real-time messaging handles retries and persistence. Client-generated IDs let a user retry a send without creating a duplicate message.</p>
+            <details class="chapter-details">
+              <summary>Messaging, interviews, and model serving</summary>
+              <div class="chapter-details-body work-list">
+                <article>
+                  <h3>Relay</h3>
+                  <p>Authenticated WebSockets, SQLite persistence, and Azure deployment with Docker Compose, Caddy TLS, health checks, and backups.</p>
+                  <p class="evidence">Educational Signal-inspired build with mocked OTP and server-side message storage.</p>
+                  <a href="https://github.com/JackivGarg/SIGNAL-CLONE">Relay source</a>
+                </article>
+                <article>
+                  <h3>VersitySync</h3>
+                  <p>Led a six-person team building interview practice for students. Live sessions combine voice transcription, interruption handling, and adaptive follow-ups across role-based and coding interviews.</p>
+                  <a href="portfolio.html#project/versity">VersitySync details</a>
+                </article>
+                <article>
+                  <h3>Vehicle Insurance Prediction</h3>
+                  <p>A six-stage ML pipeline with containerized FastAPI inference and GitHub Actions automation for building images and publishing to Amazon ECR.</p>
+                  <a href="https://github.com/JackivGarg/Vehicle-Insurance-">Pipeline source</a>
+                </article>
+              </div>
+            </details>
+            <div class="source-links"><a href="portfolio.html#project/relay">Read the Relay case study</a><a href="portfolio.html#work">Browse all projects</a><a href="https://github.com/JackivGarg?tab=repositories">GitHub repositories</a></div>
+          </div>
+        </section>
+
+        <section id="toolkit" class="chapter" data-chapter="toolkit" aria-labelledby="toolkit-title">
+          <span id="work-toolkit" class="legacy-anchor" aria-hidden="true"></span>
+          <span id="about" class="legacy-anchor" aria-hidden="true"></span>
+          <div class="chapter-inner">
+            <h2 id="toolkit-title">Toolkit and recognition</h2>
+            <p class="lede">B.Tech in Computer Science &amp; Engineering at Bennett University, expected 2028. CGPA 8.78.</p>
+            <details class="chapter-details">
+              <summary>Tools, recognition, and coursework</summary>
+              <div class="chapter-details-body">
+                <dl class="skill-list">
+                  <div><dt>AI engineering</dt><dd>LangGraph, LangChain, retrieval-augmented generation, model evaluation, Hugging Face, scikit-learn</dd></div>
+                  <div><dt>Backend &amp; data</dt><dd>Python, FastAPI, REST, WebSockets, PostgreSQL, SQLite, SQLAlchemy, Supabase, Redis</dd></div>
+                  <div><dt>Full stack &amp; delivery</dt><dd>TypeScript, JavaScript, React, Next.js, Node.js, Express, Docker, GitHub Actions, Azure, AWS</dd></div>
+                </dl>
+                <div class="recognition">
+                  <h3>Recognition</h3>
+                  <ul class="detail-list">
+                    <li><strong>First place, SmartBU Hackathon 2025</strong> · Bennett University, September 19–21, 2025.</li>
+                    <li><strong>LeetCode 100 Days Badge</strong> · 2026.</li>
+                    <li><strong>Campus leadership</strong> · NLP Department Lead, Artificial Intelligence Society, and Tech Team Co-Head, CodeChef Bennett.</li>
+                  </ul>
+                  <details>
+                    <summary>Verified coursework</summary>
+                    <ul class="detail-list">
+                      <li>Complete Agentic AI Bootcamp With LangGraph and LangChain · Udemy, March 2026.</li>
+                      <li>Complete Generative AI Course With LangChain and Hugging Face · Udemy, June 2026.</li>
+                      <li>The Bits and Bytes of Computer Networking · Google via Coursera, April 2026.</li>
+                      <li>Operating Systems Fundamentals · Akamai via Coursera, April 2026.</li>
+                      <li>Introduction to Microprocessors · Arm via Coursera, March 2026.</li>
+                    </ul>
+                  </details>
+                </div>
+              </div>
+            </details>
+            <div class="source-links"><a href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">View résumé</a></div>
+          </div>
+        </section>
+      </div>
+      <footer class="contact" id="contact">
+        <h2>Let’s build something together.</h2>
+        <p>For AI and backend opportunities, project questions, or technical collaborations.</p>
+        <div class="actions"><a class="button" href="mailto:jackivcodes05@gmail.com">Email Jackiv</a><a href="https://www.linkedin.com/in/jackiv-garg">LinkedIn</a><a href="https://github.com/JackivGarg">GitHub</a><a href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Résumé</a><a href="#top">Back to top</a></div>
+      </footer>
+    </div>
   </main>
-
-  <footer class="contact" id="contact">
-    <h2>Let’s build something together.</h2>
-    <p>For AI and backend opportunities, project questions, or technical collaborations.</p>
-    <div class="actions"><a class="button" href="mailto:jackivcodes05@gmail.com">Email Jackiv</a><a href="https://www.linkedin.com/in/jackiv-garg">LinkedIn</a><a href="https://github.com/JackivGarg">GitHub</a><a href="assets/Jackiv-Garg-Resume.pdf" target="_blank" rel="noopener">Résumé</a><a href="#top">Back to top</a></div>
-  </footer>
 </body>
 </html>

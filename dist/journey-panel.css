@@ -1,0 +1,185 @@
+/* A fixed profile beside one scrollable, reversible project story. */
+:root {
+  --rail: clamp(295px, 36vw, 570px);
+  --stage-height: clamp(230px, 41svh, 405px);
+  --story-gutter: clamp(28px, 5.5vw, 88px);
+}
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.masthead-actions { display: flex; align-items: center; gap: 14px; }
+.portfolio-shell {
+  padding-top: var(--header-height);
+  background: var(--cobalt);
+}
+.profile-pane {
+  color: var(--porcelain);
+  padding: clamp(38px, 6vw, 96px) clamp(26px, 4.1vw, 72px);
+  min-width: 0;
+  background: var(--cobalt);
+}
+.profile-pane h1 {
+  font: 650 clamp(3rem, 5.1vw, 5.65rem)/.98 "Bricolage Grotesque", "Segoe UI", sans-serif;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+  margin: 0;
+}
+.profile-pane .hero-intro {
+  color: var(--porcelain);
+  font: 610 clamp(1.13rem, 1.8vw, 1.52rem)/1.28 "Bricolage Grotesque", "Segoe UI", sans-serif;
+  margin-top: 15px;
+  max-width: 28ch;
+}
+.profile-pane .lede {
+  max-width: 38ch;
+  color: var(--blue-soft);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+.profile-pane .chapter-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 12px;
+  margin: 29px 0 20px;
+  padding: 10px 0;
+  border-block: 1px solid #ffffff3d;
+  overflow: visible;
+}
+.profile-pane .chapter-nav a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  white-space: normal;
+  padding: 8px 0;
+  line-height: 1.3;
+  font-size: .88rem;
+}
+.profile-pane .chapter-nav a::after { bottom: 6px; width: min(100%, 92px); }
+.profile-links, .profile-pane .actions { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+.profile-links a, .profile-pane .actions a { font-size: .88rem; text-underline-offset: 4px; }
+.profile-pane :focus-visible { outline-color: var(--porcelain); }
+.profile-pane .scroll-cue, .profile-pane .scroll-hint {
+  color: var(--blue-soft);
+  margin: 24px 0 0;
+  line-height: 1.5;
+  font-size: .86rem;
+}
+.right-pane {
+  min-width: 0;
+  background: var(--porcelain);
+  color: var(--ink);
+}
+.right-pane:focus-visible { outline-offset: -3px; }
+.right-pane .stage {
+  position: sticky;
+  z-index: 3;
+  inset: auto;
+  top: var(--header-height);
+  width: 100%;
+  height: var(--stage-height);
+  background: var(--cobalt-deep);
+  border-bottom: 1px solid #ffffff3d;
+}
+.right-pane .world-caption {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  inset: auto clamp(17px, 3.4vw, 54px) 11px;
+  min-height: 39px;
+  padding: 9px 0 0;
+  border-top: 1px solid #dce5ff54;
+  color: var(--porcelain);
+  background: linear-gradient(0deg, var(--cobalt-deep), transparent);
+  font-size: .79rem;
+  gap: 8px 14px;
+}
+.right-pane .world-caption .scene-link { flex: 0 0 auto; }
+.right-pane .journey {
+  padding-top: 0;
+  width: 100%;
+  pointer-events: auto;
+}
+.right-pane .chapter {
+  width: 100%;
+  min-height: max(390px, calc(100svh - var(--header-height) - var(--stage-height)));
+  align-items: flex-start;
+  padding: clamp(34px, 5.2vw, 68px) var(--story-gutter);
+  scroll-margin-top: 0;
+}
+.right-pane #top {
+  background: var(--porcelain);
+  color: var(--ink);
+}
+.right-pane #top .lede { color: var(--ink-muted); }
+.right-pane #top :focus-visible { outline-color: var(--cobalt); }
+.right-pane .chapter-inner { max-width: 690px; }
+.right-pane .chapter h2 {
+  font-size: clamp(2rem, 3.8vw, 4rem);
+  text-wrap: balance;
+}
+.right-pane .chapter .lede { font-size: clamp(1rem, 1.25vw, 1.16rem); }
+.right-pane .chapter details {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.right-pane .chapter details summary {
+  cursor: pointer;
+  color: var(--cobalt-deep);
+  padding: 13px 0;
+  font-weight: 700;
+}
+.right-pane .chapter details summary:hover { text-decoration: underline; text-underline-offset: 4px; }
+.right-pane .chapter details .detail-list { margin-top: 4px; }
+.right-pane footer.contact {
+  width: 100%;
+  padding: clamp(44px, 6vw, 90px) var(--story-gutter);
+}
+@media (min-width: 900px) and (min-height: 620px) {
+  .portfolio-shell { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); }
+  .profile-pane {
+    height: calc(100svh - var(--header-height));
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  .right-pane {
+    height: calc(100svh - var(--header-height));
+    overflow: auto;
+    overscroll-behavior-y: contain;
+    scroll-padding-top: var(--stage-height);
+    scrollbar-gutter: stable;
+    scrollbar-color: #6177ce var(--porcelain);
+  }
+  .right-pane .stage { top: 0; }
+}
+@media (max-width: 899px), (max-height: 619px) {
+  :root { --stage-height: clamp(155px, 25svh, 260px); --story-gutter: clamp(22px, 6vw, 48px); }
+  html { scroll-padding-top: calc(var(--header-height) + var(--stage-height)); }
+  .profile-pane { padding: 35px var(--story-gutter) 27px; }
+  .profile-pane .chapter-nav { margin: 20px 0 13px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .profile-pane .chapter-nav a { font-size: .81rem; }
+  .profile-pane .scroll-cue, .profile-pane .scroll-hint { margin-top: 16px; }
+  .right-pane .chapter { min-height: 0; padding-block: 38px 48px; }
+  .right-pane .world-caption { font-size: .72rem; padding-top: 6px; }
+}
+@media (max-width: 420px) {
+  .profile-pane .chapter-nav a { min-height: 43px; }
+  .right-pane .world-caption { column-gap: 6px; }
+}
+@media (max-height: 420px) and (max-width: 899px) {
+  :root { --stage-height: 110px; }
+  .right-pane .world-caption { min-height: 26px; bottom: 6px; }
+}
+.profile-pane .button { background: var(--porcelain); color: var(--cobalt-deep); margin-top: 16px; }
+.profile-pane .button:hover { background: var(--blue-soft); }
+.profile-pane .button svg, .right-pane .scroll-cue svg { width: 16px; height: 16px; flex: 0 0 16px; }
+.right-pane #top .scroll-cue {
+  margin-top: 20px;
+  color: var(--cobalt-deep);
+  text-decoration-color: #435bc688;
+}

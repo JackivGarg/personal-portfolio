@@ -14,6 +14,6 @@ typography:
 
 # Systems in Motion
 
-The existing Six Strings landing is the visual reference. Use a cobalt stage with porcelain type, a composed spatial object, and generous reading space. The world illustrates engineering across a single backbone. Native scroll passes through six stations: system core, production rack, agent graph, generation aperture, backend layers, and toolkit. Chapter copy and evidence links are semantic HTML. Illustrative geometry has no essential hotspots. The static blueprint stays readable when WebGL is unavailable, and reduced motion snaps between authored views.
+The cobalt and porcelain palette comes from the Six Strings reference. A concise cobalt profile stays visible on the left on desktop. The right pane owns the scroll journey. Its 3D stage sticks above the chapter text, and both move through the same ordered story. Native details and source links allow visitors to go deeper.
 
-The first viewport pairs a large name and precise positioning with the composed core. The chapters then move from production evidence to project architecture and finish with skills, recognition, and contact. The previous project explorer remains reachable through its existing route.
+The 3D artifacts describe engineering work in each chapter. Their progress is reversible by scrolling. The profile and story join one document on narrow screens. Chapter copy stays readable in HTML, with a static blueprint if WebGL is unavailable and authored still frames in reduced motion mode.
