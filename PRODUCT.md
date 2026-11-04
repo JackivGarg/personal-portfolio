@@ -16,7 +16,7 @@ Make Jackiv Garg’s engineering decisions, production experience, and project e
 
 ## Capabilities and Constraints
 
-Native page scrolling with a separate work gallery on desktop and one scroll stream on phones. Every chapter is readable in ordinary HTML. Maintain project deep links, public hosting, and motion controls. Certificate evidence is summarized without publishing source documents or credential IDs.
+Native scrolling, a continuous Three.js scene, and GSAP ScrollTrigger. Every chapter is readable in ordinary HTML. Maintain project deep links, public hosting, and motion controls. Certificate evidence is summarized without publishing source documents or credential IDs.
 
 ## Evidence on Hand
 
