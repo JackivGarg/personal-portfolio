@@ -38,11 +38,11 @@ function updateStory() {
   const y = clamp(window.scrollY, 0, maxScroll);
   let index = 0;
   while (index < anchors.length - 1 && y >= anchors[index + 1]) index++;
-  const next = Math.min(index + 1, anchors.length - 1);
-  const interval = anchors[next] - anchors[index];
+  const nextAnchor = anchors[index + 1];
+  const interval = (nextAnchor ?? maxScroll) - anchors[index];
   const local = interval > 0 ? (y - anchors[index]) / interval : 0;
   chapterProgress = index + local;
-  exact = index + THREE.MathUtils.smoothstep(local, .43, 1);
+  exact = index + (nextAnchor === undefined ? 0 : THREE.MathUtils.smoothstep(local, .43, 1));
   const current = Math.min(Math.round(exact), chapters.length - 1);
   const progress = y / maxScroll;
   meter?.style.setProperty('--progress', String(progress));
@@ -255,6 +255,9 @@ if (chapters.length) {
   listen(reduced, 'change', syncMotion);
   listen(window, 'hashchange', refreshStory);
   listen(window, 'pageshow', () => ScrollTrigger.refresh());
+  listen(document, 'toggle', event => {
+    if (event.target instanceof HTMLDetailsElement) ScrollTrigger.refresh();
+  }, { capture: true });
   listen(window, 'pagehide', event => {
     if (event.persisted) return;
     listeners.abort();
