@@ -16,7 +16,7 @@ Make Jackiv Garg’s engineering decisions, production experience, and project e
 
 ## Capabilities and Constraints
 
-A fixed desktop profile and a native scroll pane for the engineering story, with a continuous Three.js scene driven by that pane. The page uses one document scroll on narrow screens. Every chapter is readable in ordinary HTML. Maintain project deep links, public hosting, and motion controls. Certificate evidence is summarized without publishing source documents or credential IDs.
+The desktop section index and current story scroll independently. The right pane restores its reading position per section. Local scroll progress drives the story diagrams. The page uses one document scroll on narrow screens. Every chapter is readable in ordinary HTML. Maintain project deep links, public hosting, and motion controls. Certificate evidence is summarized without publishing source documents or credential IDs.
 
 ## Evidence on Hand
 

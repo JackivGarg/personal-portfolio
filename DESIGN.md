@@ -1,19 +1,20 @@
 ---
-name: Jackiv Garg / Systems in Motion
+name: Jackiv Garg / Engineering portfolio
 colors:
-  cobalt: '#233db7'
-  deep: '#192e99'
-  porcelain: '#f1f3fa'
-  ink: '#17213b'
-  soft: '#d5ddff'
-  signal: '#a9e9ff'
+  ground: '#151419'
+  panel: '#19181e'
+  ink: '#f1ece6'
+  muted: '#bbb3b7'
+  copper: '#dba58b'
+  violet: '#aaa5ca'
+  line: '#42383e'
 typography:
   display: Bricolage Grotesque
   body: Rethink Sans
 ---
 
-# Systems in Motion
+# Engineering portfolio
 
-The cobalt and porcelain palette comes from the Six Strings reference. A concise cobalt profile stays visible on the left on desktop. The right pane owns the scroll journey. Its 3D stage sticks above the chapter text, and both move through the same ordered story. Native details and source links allow visitors to go deeper.
+A near-black textured section rail sits beside a quiet detail pane. Warm white typography carries the story, with copper for links and progress and muted violet for diagram structure. On desktop the left pane changes sections. The right pane browses the current section and remembers its reading position when the visitor returns.
 
-The 3D artifacts describe engineering work in each chapter. Their progress is reversible by scrolling. The profile and story join one document on narrow screens. Chapter copy stays readable in HTML, with a static blueprint if WebGL is unavailable and authored still frames in reduced motion mode.
+Project diagrams use local scroll progress to reveal steps, move packets, and connect components. Native links, details, keyboard scrolling, and reduced motion remain available. The panes join a single document on narrow screens, with chapter links that jump to the corresponding stories.
